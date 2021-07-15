@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E9317767269F4BBA0004B739 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9317766269F4BBA0004B739 /* AppDelegate.swift */; };
-		E9317769269F4BBA0004B739 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9317768269F4BBA0004B739 /* ViewController.swift */; };
+		E9090440269F68EF00B38FFA /* DockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E909043F269F68EF00B38FFA /* DockModel.swift */; };
+		E9090443269F6C0300B38FFA /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = E9090442269F6C0300B38FFA /* Quick */; };
+		E9090446269F6C5A00B38FFA /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = E9090445269F6C5A00B38FFA /* Nimble */; };
+		E9090448269F6D8A00B38FFA /* DockModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9090447269F6D8A00B38FFA /* DockModelSpec.swift */; };
 		E931776B269F4BBC0004B739 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E931776A269F4BBC0004B739 /* Assets.xcassets */; };
 		E931776E269F4BBC0004B739 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E931776C269F4BBC0004B739 /* Main.storyboard */; };
-		E9317778269F4BBC0004B739 /* DockBarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9317777269F4BBC0004B739 /* DockBarTests.swift */; };
-		E9317782269F4BBC0004B739 /* DockBarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9317781269F4BBC0004B739 /* DockBarUITests.swift */; };
+		E9317798269F4C670004B739 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9317796269F4C670004B739 /* AppDelegate.swift */; };
+		E931779C269F4E4E0004B739 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E931779B269F4E4E0004B739 /* StatusBarController.swift */; };
+		E9EBFBC4269FF43700BD2725 /* DockEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBFBC3269FF43700BD2725 /* DockEntry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,25 +26,23 @@
 			remoteGlobalIDString = E9317762269F4BBA0004B739;
 			remoteInfo = DockBar;
 		};
-		E931777E269F4BBC0004B739 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E931775B269F4BBA0004B739 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E9317762269F4BBA0004B739;
-			remoteInfo = DockBar;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E909043F269F68EF00B38FFA /* DockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockModel.swift; sourceTree = "<group>"; };
+		E9090447269F6D8A00B38FFA /* DockModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockModelSpec.swift; sourceTree = "<group>"; };
+		E9090449269F711800B38FFA /* DockBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DockBar.entitlements; sourceTree = "<group>"; };
 		E9317763269F4BBA0004B739 /* DockBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DockBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9317766269F4BBA0004B739 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E9317768269F4BBA0004B739 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E931776A269F4BBC0004B739 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E931776D269F4BBC0004B739 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E9317773269F4BBC0004B739 /* DockBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DockBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9317777269F4BBC0004B739 /* DockBarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockBarTests.swift; sourceTree = "<group>"; };
-		E931777D269F4BBC0004B739 /* DockBarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DockBarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9317781269F4BBC0004B739 /* DockBarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockBarUITests.swift; sourceTree = "<group>"; };
+		E931778E269F4C2F0004B739 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		E931778F269F4C2F0004B739 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		E9317790269F4C2F0004B739 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E9317796269F4C670004B739 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E931779A269F4CB20004B739 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E931779B269F4E4E0004B739 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
+		E9EBFBC3269FF43700BD2725 /* DockEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,25 +57,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E931777A269F4BBC0004B739 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				E9090443269F6C0300B38FFA /* Quick in Frameworks */,
+				E9090446269F6C5A00B38FFA /* Nimble in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E909043E269F68C800B38FFA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E909043F269F68EF00B38FFA /* DockModel.swift */,
+				E9EBFBC3269FF43700BD2725 /* DockEntry.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		E931775A269F4BBA0004B739 = {
 			isa = PBXGroup;
 			children = (
+				E9317790269F4C2F0004B739 /* README.md */,
+				E931778E269F4C2F0004B739 /* LICENSE.md */,
+				E931778F269F4C2F0004B739 /* .gitignore */,
 				E9317765269F4BBA0004B739 /* DockBar */,
 				E9317776269F4BBC0004B739 /* DockBarTests */,
-				E9317780269F4BBC0004B739 /* DockBarUITests */,
 				E9317764269F4BBA0004B739 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -84,7 +91,6 @@
 			children = (
 				E9317763269F4BBA0004B739 /* DockBar.app */,
 				E9317773269F4BBC0004B739 /* DockBarTests.xctest */,
-				E931777D269F4BBC0004B739 /* DockBarUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -92,10 +98,8 @@
 		E9317765269F4BBA0004B739 /* DockBar */ = {
 			isa = PBXGroup;
 			children = (
-				E9317766269F4BBA0004B739 /* AppDelegate.swift */,
-				E9317768269F4BBA0004B739 /* ViewController.swift */,
-				E931776A269F4BBC0004B739 /* Assets.xcassets */,
-				E931776C269F4BBC0004B739 /* Main.storyboard */,
+				E9317791269F4C670004B739 /* Source */,
+				E9317799269F4C700004B739 /* Resources */,
 			);
 			path = DockBar;
 			sourceTree = "<group>";
@@ -103,17 +107,54 @@
 		E9317776269F4BBC0004B739 /* DockBarTests */ = {
 			isa = PBXGroup;
 			children = (
-				E9317777269F4BBC0004B739 /* DockBarTests.swift */,
+				E9090447269F6D8A00B38FFA /* DockModelSpec.swift */,
 			);
 			path = DockBarTests;
 			sourceTree = "<group>";
 		};
-		E9317780269F4BBC0004B739 /* DockBarUITests */ = {
+		E9317791269F4C670004B739 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				E9317781269F4BBC0004B739 /* DockBarUITests.swift */,
+				E9317792269F4C670004B739 /* Classes */,
 			);
-			path = DockBarUITests;
+			path = Source;
+			sourceTree = "<group>";
+		};
+		E9317792269F4C670004B739 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				E9317795269F4C670004B739 /* Application */,
+				E909043E269F68C800B38FFA /* Model */,
+				E9317793269F4C670004B739 /* UI */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		E9317793269F4C670004B739 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				E931779B269F4E4E0004B739 /* StatusBarController.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		E9317795269F4C670004B739 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				E9317796269F4C670004B739 /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		E9317799269F4C700004B739 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E9090449269F711800B38FFA /* DockBar.entitlements */,
+				E931779A269F4CB20004B739 /* Info.plist */,
+				E931776C269F4BBC0004B739 /* Main.storyboard */,
+				E931776A269F4BBC0004B739 /* Assets.xcassets */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,27 +191,13 @@
 				E9317775269F4BBC0004B739 /* PBXTargetDependency */,
 			);
 			name = DockBarTests;
+			packageProductDependencies = (
+				E9090442269F6C0300B38FFA /* Quick */,
+				E9090445269F6C5A00B38FFA /* Nimble */,
+			);
 			productName = DockBarTests;
 			productReference = E9317773269F4BBC0004B739 /* DockBarTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		E931777C269F4BBC0004B739 /* DockBarUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E931778B269F4BBC0004B739 /* Build configuration list for PBXNativeTarget "DockBarUITests" */;
-			buildPhases = (
-				E9317779269F4BBC0004B739 /* Sources */,
-				E931777A269F4BBC0004B739 /* Frameworks */,
-				E931777B269F4BBC0004B739 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E931777F269F4BBC0004B739 /* PBXTargetDependency */,
-			);
-			name = DockBarUITests;
-			productName = DockBarUITests;
-			productReference = E931777D269F4BBC0004B739 /* DockBarUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -189,10 +216,6 @@
 						CreatedOnToolsVersion = 13.0;
 						TestTargetID = E9317762269F4BBA0004B739;
 					};
-					E931777C269F4BBC0004B739 = {
-						CreatedOnToolsVersion = 13.0;
-						TestTargetID = E9317762269F4BBA0004B739;
-					};
 				};
 			};
 			buildConfigurationList = E931775E269F4BBA0004B739 /* Build configuration list for PBXProject "DockBar" */;
@@ -204,13 +227,16 @@
 				Base,
 			);
 			mainGroup = E931775A269F4BBA0004B739;
+			packageReferences = (
+				E9090441269F6C0300B38FFA /* XCRemoteSwiftPackageReference "Quick" */,
+				E9090444269F6C5A00B38FFA /* XCRemoteSwiftPackageReference "Nimble" */,
+			);
 			productRefGroup = E9317764269F4BBA0004B739 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				E9317762269F4BBA0004B739 /* DockBar */,
 				E9317772269F4BBC0004B739 /* DockBarTests */,
-				E931777C269F4BBC0004B739 /* DockBarUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -232,13 +258,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E931777B269F4BBC0004B739 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -246,8 +265,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9317769269F4BBA0004B739 /* ViewController.swift in Sources */,
-				E9317767269F4BBA0004B739 /* AppDelegate.swift in Sources */,
+				E9317798269F4C670004B739 /* AppDelegate.swift in Sources */,
+				E9EBFBC4269FF43700BD2725 /* DockEntry.swift in Sources */,
+				E931779C269F4E4E0004B739 /* StatusBarController.swift in Sources */,
+				E9090440269F68EF00B38FFA /* DockModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,15 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9317778269F4BBC0004B739 /* DockBarTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E9317779269F4BBC0004B739 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E9317782269F4BBC0004B739 /* DockBarUITests.swift in Sources */,
+				E9090448269F6D8A00B38FFA /* DockModelSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,11 +287,6 @@
 			isa = PBXTargetDependency;
 			target = E9317762269F4BBA0004B739 /* DockBar */;
 			targetProxy = E9317774269F4BBC0004B739 /* PBXContainerItemProxy */;
-		};
-		E931777F269F4BBC0004B739 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E9317762269F4BBA0004B739 /* DockBar */;
-			targetProxy = E931777E269F4BBC0004B739 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -414,6 +422,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DockBar/DockBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -422,6 +431,10 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DockBar/Info.plist;
+				INFOPLIST_KEY_CFBundleExecutable = DockBar;
+				INFOPLIST_KEY_CFBundleName = DockBar;
+				INFOPLIST_KEY_CFBundleVersion = 1;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -442,6 +455,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DockBar/DockBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -450,6 +464,10 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DockBar/Info.plist;
+				INFOPLIST_KEY_CFBundleExecutable = DockBar;
+				INFOPLIST_KEY_CFBundleName = DockBar;
+				INFOPLIST_KEY_CFBundleVersion = 1;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -515,52 +533,6 @@
 			};
 			name = Release;
 		};
-		E931778C269F4BBC0004B739 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GQE994U6EG;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.thbonk.DockBarUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = DockBar;
-			};
-			name = Debug;
-		};
-		E931778D269F4BBC0004B739 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GQE994U6EG;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.thbonk.DockBarUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = DockBar;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -591,16 +563,39 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E931778B269F4BBC0004B739 /* Build configuration list for PBXNativeTarget "DockBarUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E931778C269F4BBC0004B739 /* Debug */,
-				E931778D269F4BBC0004B739 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E9090441269F6C0300B38FFA /* XCRemoteSwiftPackageReference "Quick" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Quick/Quick";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		E9090444269F6C5A00B38FFA /* XCRemoteSwiftPackageReference "Nimble" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Quick/Nimble";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E9090442269F6C0300B38FFA /* Quick */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E9090441269F6C0300B38FFA /* XCRemoteSwiftPackageReference "Quick" */;
+			productName = Quick;
+		};
+		E9090445269F6C5A00B38FFA /* Nimble */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E9090444269F6C5A00B38FFA /* XCRemoteSwiftPackageReference "Nimble" */;
+			productName = Nimble;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E931775B269F4BBA0004B739 /* Project object */;
 }
