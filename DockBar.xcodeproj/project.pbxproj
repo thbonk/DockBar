@@ -11,6 +11,8 @@
 		E9090443269F6C0300B38FFA /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = E9090442269F6C0300B38FFA /* Quick */; };
 		E9090446269F6C5A00B38FFA /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = E9090445269F6C5A00B38FFA /* Nimble */; };
 		E9090448269F6D8A00B38FFA /* DockModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9090447269F6D8A00B38FFA /* DockModelSpec.swift */; };
+		E92AFC9D26A034D9007DFD63 /* Magnet in Frameworks */ = {isa = PBXBuildFile; productRef = E92AFC9C26A034D9007DFD63 /* Magnet */; };
+		E92AFC9F26A03542007DFD63 /* PopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92AFC9E26A03542007DFD63 /* PopupController.swift */; };
 		E931776B269F4BBC0004B739 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E931776A269F4BBC0004B739 /* Assets.xcassets */; };
 		E931776E269F4BBC0004B739 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E931776C269F4BBC0004B739 /* Main.storyboard */; };
 		E9317798269F4C670004B739 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9317796269F4C670004B739 /* AppDelegate.swift */; };
@@ -32,6 +34,7 @@
 		E909043F269F68EF00B38FFA /* DockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockModel.swift; sourceTree = "<group>"; };
 		E9090447269F6D8A00B38FFA /* DockModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockModelSpec.swift; sourceTree = "<group>"; };
 		E9090449269F711800B38FFA /* DockBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DockBar.entitlements; sourceTree = "<group>"; };
+		E92AFC9E26A03542007DFD63 /* PopupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupController.swift; sourceTree = "<group>"; };
 		E9317763269F4BBA0004B739 /* DockBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DockBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E931776A269F4BBC0004B739 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E931776D269F4BBC0004B739 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -50,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E92AFC9D26A034D9007DFD63 /* Magnet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				E931779B269F4E4E0004B739 /* StatusBarController.swift */,
+				E92AFC9E26A03542007DFD63 /* PopupController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -173,6 +178,9 @@
 			dependencies = (
 			);
 			name = DockBar;
+			packageProductDependencies = (
+				E92AFC9C26A034D9007DFD63 /* Magnet */,
+			);
 			productName = DockBar;
 			productReference = E9317763269F4BBA0004B739 /* DockBar.app */;
 			productType = "com.apple.product-type.application";
@@ -230,6 +238,7 @@
 			packageReferences = (
 				E9090441269F6C0300B38FFA /* XCRemoteSwiftPackageReference "Quick" */,
 				E9090444269F6C5A00B38FFA /* XCRemoteSwiftPackageReference "Nimble" */,
+				E92AFC9B26A034D9007DFD63 /* XCRemoteSwiftPackageReference "Magnet" */,
 			);
 			productRefGroup = E9317764269F4BBA0004B739 /* Products */;
 			projectDirPath = "";
@@ -265,6 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E92AFC9F26A03542007DFD63 /* PopupController.swift in Sources */,
 				E9317798269F4C670004B739 /* AppDelegate.swift in Sources */,
 				E9EBFBC4269FF43700BD2725 /* DockEntry.swift in Sources */,
 				E931779C269F4E4E0004B739 /* StatusBarController.swift in Sources */,
@@ -582,6 +592,14 @@
 				minimumVersion = 9.2.0;
 			};
 		};
+		E92AFC9B26A034D9007DFD63 /* XCRemoteSwiftPackageReference "Magnet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Clipy/Magnet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -594,6 +612,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E9090444269F6C5A00B38FFA /* XCRemoteSwiftPackageReference "Nimble" */;
 			productName = Nimble;
+		};
+		E92AFC9C26A034D9007DFD63 /* Magnet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E92AFC9B26A034D9007DFD63 /* XCRemoteSwiftPackageReference "Magnet" */;
+			productName = Magnet;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

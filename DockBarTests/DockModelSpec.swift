@@ -43,6 +43,19 @@ final class DockModelSpec: QuickSpec {
 
         expect(apps).notTo(beNil())
         apps?.forEach { entry  in
+          expect(entry.id > 0).to(beTrue())
+          expect(entry.label).toNot(beEmpty())
+          expect(entry.bundleIdentifier).toNot(beEmpty())
+          expect(entry.url).toNot(beNil())
+          expect(entry.icon).toNot(beNil())
+        }
+      }
+
+      it("Check whether the recent apps are valid, if available") {
+        let apps = dockModel?.recentApplications
+
+        apps?.forEach { entry  in
+          expect(entry.id > 0).to(beTrue())
           expect(entry.label).toNot(beEmpty())
           expect(entry.bundleIdentifier).toNot(beEmpty())
           expect(entry.url).toNot(beNil())

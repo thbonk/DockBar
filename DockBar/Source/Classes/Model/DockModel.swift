@@ -21,7 +21,8 @@
 import Foundation
 
 fileprivate extension String {
-  static let Applications = "persistent-apps"
+  static let Applications       = "persistent-apps"
+  static let RecentApplications = "recent-apps"
 }
 
 class DockModel {
@@ -30,6 +31,11 @@ class DockModel {
 
   public var applications: [DockEntry]? {
     return persistentApps?
+      .map { app in DockEntry(data: app) }
+  }
+
+  public var recentApplications: [DockEntry]? {
+    return recentApps?
       .map { app in DockEntry(data: app) }
   }
 
@@ -49,6 +55,9 @@ class DockModel {
   }
   private var persistentApps: Array<Dictionary<String, Any>>? {
     return dockConfiguration?[.Applications] as? Array<Dictionary<String, Any>>
+  }
+  private var recentApps: Array<Dictionary<String, Any>>? {
+    return dockConfiguration?[.RecentApplications] as? Array<Dictionary<String, Any>>
   }
 
 

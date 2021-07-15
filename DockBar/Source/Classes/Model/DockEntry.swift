@@ -22,6 +22,7 @@ import Foundation
 import AppKit
 
 fileprivate extension String {
+  static let GUID             = "GUID"
   static let TileData         = "tile-data"
   static let FileLabel        = "file-label"
   static let BundleIdentifier = "bundle-identifier"
@@ -29,10 +30,11 @@ fileprivate extension String {
   static let FileURL          = "_CFURLString"
 }
 
-struct DockEntry {
+struct DockEntry: Identifiable {
 
   // MARK: - Public Properties
 
+  private(set) var id: Int = 0
   private(set) var label: String = ""
   private(set) var bundleIdentifier: String = ""
   private(set) var url: URL? = nil
@@ -51,6 +53,7 @@ struct DockEntry {
   init(data: Dictionary<String, Any>) {
     let tileData = toDictionary(data[.TileData] as Any)
 
+    id = toInt(data[.GUID] as Any)
     label = toString(tileData[.FileLabel] as Any)
     bundleIdentifier = toString(tileData[.BundleIdentifier] as Any)
     url = URL(string: toString(toDictionary(tileData[.FileData] as Any)[.FileURL] as Any))
@@ -58,6 +61,10 @@ struct DockEntry {
 
 
   // MARK: - Private Methods
+
+  private func toInt(_ data: Any) -> Int {
+    return Int(truncating: (data as! NSNumber))
+  }
 
   private func toDictionary(_ data: Any) -> Dictionary<String, Any> {
     return data as! Dictionary<String, Any>

@@ -1,8 +1,8 @@
 //
-//  AppDelegate.swift
+//  PopupController.swift
 //  DockBar
 //
-//  Created by Thomas Bonk on 14.07.21.
+//  Created by Thomas Bonk on 15.07.21.
 //  Copyright 2021 Thomas Bonk.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,32 +18,31 @@
 //  limitations under the License.
 //
 
-import AppKit
+import Foundation
+import Magnet
 
-@main
-class AppDelegate: NSObject, NSApplicationDelegate {
+class PopupController: NSObject {
 
   // MARK: - Private Properties
 
-  @IBOutlet
-  private var statusBarController: StatusBarController!
-  @IBOutlet
-  private var popupController: PopupController!
+  private var keyCombo: KeyCombo!
+  private var hotKey: HotKey!
 
 
-  // MARK: - NSApplicationDelegate
-  
-  func applicationDidFinishLaunching(_ aNotification: Notification) {
-    // Insert code here to initialize your application
+  // MARK: - Initialization
+
+  override func awakeFromNib() {
+    if let kc = KeyCombo(key: .space, cocoaModifiers: .option) {
+      keyCombo = kc
+      hotKey = HotKey(identifier: "Option + Space", keyCombo: keyCombo, actionQueue: .main, handler: togglePopup(key:))
+      hotKey.register()
+    }
   }
 
-  func applicationWillTerminate(_ aNotification: Notification) {
-    // Insert code here to tear down your application
-  }
 
-  func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
-    return true
-  }
+  // MARK: - Private Properties
 
+  private func togglePopup(key: HotKey) {
+
+  }
 }
-

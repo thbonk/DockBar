@@ -675,12 +675,14 @@
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="DockBar" customModuleProvider="target">
                     <connections>
+                        <outlet property="popupController" destination="abI-2l-Rzw" id="0oG-Q1-f72"/>
                         <outlet property="statusBarController" destination="JgM-Gl-VtZ" id="YJ5-76-MVZ"/>
                     </connections>
                 </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <customObject id="JgM-Gl-VtZ" customClass="StatusBarController" customModule="DockBar" customModuleProvider="target"/>
+                <customObject id="abI-2l-Rzw" customClass="PopupController" customModule="DockBar" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
