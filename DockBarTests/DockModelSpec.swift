@@ -32,7 +32,7 @@ final class DockModelSpec: QuickSpec {
 
       var dockModel: DockModel? = nil
 
-      it("Instantiate the Dock model") {
+      /*it("Instantiate the Dock model") {
         dockModel = DockModel()
 
         expect(dockModel).notTo(beNil())
@@ -52,7 +52,7 @@ final class DockModelSpec: QuickSpec {
       }
 
       it("Check whether the recent apps are valid, if available") {
-        let apps = dockModel?.recentApplications
+        let apps = dockModel.pers
 
         apps?.forEach { entry  in
           expect(entry.id > 0).to(beTrue())
@@ -61,7 +61,7 @@ final class DockModelSpec: QuickSpec {
           expect(entry.url).toNot(beNil())
           expect(entry.icon).toNot(beNil())
         }
-      }
+      }*/
     }
   }
 

@@ -20,64 +20,11 @@
 
 import Foundation
 
-fileprivate extension String {
-  static let Applications       = "persistent-apps"
-  static let RecentApplications = "recent-apps"
-}
-
 class DockModel {
 
   // MARK: - Public Properties
 
-  public var applications: [DockEntry]? {
-    return persistentApps?
-      .map { app in DockEntry(data: app) }
-  }
-
-  public var recentApplications: [DockEntry]? {
-    return recentApps?
-      .map { app in DockEntry(data: app) }
-  }
-
-
-  // MARK: - Private Properties
-
-  private var dockConfiguration: Dictionary<String, Any>? = nil
-  private var userDirectory: URL {
-    FileManager.default.urls(for: .userDirectory, in: .allDomainsMask)[0]
-  }
-  private var dockPlist: URL {
-    userDirectory
-      .appendingPathComponent(NSUserName())
-      .appendingPathComponent("Library")
-      .appendingPathComponent("Preferences")
-      .appendingPathComponent("com.apple.dock.plist")
-  }
-  private var persistentApps: Array<Dictionary<String, Any>>? {
-    return dockConfiguration?[.Applications] as? Array<Dictionary<String, Any>>
-  }
-  private var recentApps: Array<Dictionary<String, Any>>? {
-    return dockConfiguration?[.RecentApplications] as? Array<Dictionary<String, Any>>
-  }
-
-
-  // MARK: - Initialization
-
-  init?() {
-    guard let cfg = loadDockPlist() else {
-      return nil
-    }
-    dockConfiguration = cfg
-  }
-
-
-  // MARK: - Private Methods
-
-  private func loadDockPlist() -> Dictionary<String, Any>? {
-    guard let cfg = NSDictionary(contentsOf: dockPlist) as? Dictionary<String, Any> else {
-      return nil
-    }
-
-    return cfg
+  public var applications: [DockEntry] {
+    return AppDelegate.preferences.persistentApplications
   }
 }

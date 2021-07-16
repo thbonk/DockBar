@@ -19,12 +19,16 @@
 //
 
 import AppKit
+import SwiftUI
 
-class StatusBarController: NSObject {
+class StatusBarController: NSObject, ObservableObject {
 
   // MARK: - Private Properties
 
   private var statusBarItem: NSStatusItem!
+  private var popover: NSPopover!
+  private var applicationListView: AnyView!
+  private var dockModelProvider = DockModelProvider()
 
 
   // MARK: - Initialization
@@ -42,12 +46,58 @@ class StatusBarController: NSObject {
       statusBarButton.action = #selector(toggleDockList(sender:))
       statusBarButton.target = self
     }
+
+    applicationListView =
+      AnyView(
+        ApplicationListView()
+          .environmentObject(dockModelProvider)
+          .environmentObject(self))
+    popover = NSPopover()
+    popover.contentViewController = NSHostingController(rootView: applicationListView)
+  }
+
+
+  // MARK: - Public Methods
+
+  func launch(application: DockEntry) {
+    DispatchQueue.main.async {
+      NSWorkspace.shared.open(application.url!)
+    }
+
+    popover.close()
   }
 
 
   // MARK: - Private Methods
 
   @objc private func toggleDockList(sender: NSStatusBarButton) {
+    if popover.isShown {
+      popover.close()
+    } else {
+      if let popoverHeight = popoverHeight() {
+        popover.contentSize = NSSize(width: 240, height: popoverHeight)
+      }
+      popover.show(relativeTo: statusBarItem.button!.bounds, of: statusBarItem.button!, preferredEdge: .maxY)
+    }
+  }
 
+  func popoverHeight() -> Int? {
+    if let screen = screenWithMouse() {
+      let screenHeight = screen.frame.height
+
+      return min(
+        (Int(screenHeight - (NSApplication.shared.mainMenu?.menuBarHeight ?? 64) - 32)),
+        (dockModelProvider.model().applications.count * 32))
+    }
+
+    return nil
+  }
+
+  func screenWithMouse() -> NSScreen? {
+    let mouseLocation = NSEvent.mouseLocation
+    let screens = NSScreen.screens
+    let screenWithMouse = (screens.first { NSMouseInRect(mouseLocation, $0.frame, false) })
+
+    return screenWithMouse
   }
 }

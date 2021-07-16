@@ -21,16 +21,9 @@
 import Foundation
 import AppKit
 
-fileprivate extension String {
-  static let GUID             = "GUID"
-  static let TileData         = "tile-data"
-  static let FileLabel        = "file-label"
-  static let BundleIdentifier = "bundle-identifier"
-  static let FileData         = "file-data"
-  static let FileURL          = "_CFURLString"
-}
 
-struct DockEntry: Identifiable {
+
+class DockEntry: NSObject, Identifiable, NSCoding {
 
   // MARK: - Public Properties
 
@@ -49,6 +42,37 @@ struct DockEntry: Identifiable {
 
 
   // MARK: - Initialization
+
+  init(id: Int = 0, label: String, bundleIdentifier: String, url: URL?) {
+    self.id = id
+    self.label = label
+    self.bundleIdentifier = bundleIdentifier
+    self.url = url
+
+    super.init()
+  }
+
+
+  // MARK: - NSCoding
+
+  func encode(with coder: NSCoder) {
+    coder.encode(id, forKey: "id")
+    coder.encode(label, forKey: "label")
+    coder.encode(bundleIdentifier, forKey: "bundleIdentifier")
+    coder.encode(url!, forKey: "url")
+  }
+
+  required init?(coder: NSCoder) {
+    id = coder.decodeInteger(forKey: "id")
+    label = coder.decodeObject(forKey: "label") as! String
+    bundleIdentifier = coder.decodeObject(forKey: "bundleIdentifier") as! String
+    url = (coder.decodeObject(forKey: "url") as! URL)
+
+    super.init()
+  }
+
+
+  /*// MARK: - Initialization
 
   init(data: Dictionary<String, Any>) {
     let tileData = toDictionary(data[.TileData] as Any)
@@ -72,5 +96,5 @@ struct DockEntry: Identifiable {
 
   private func toString(_ data: Any) -> String {
     return data as! String
-  }
+  }*/
 }
