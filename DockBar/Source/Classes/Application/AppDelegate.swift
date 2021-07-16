@@ -41,6 +41,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   // MARK: - Class Properties
 
+  static var shared: AppDelegate = {
+    NSApplication.shared.delegate as! AppDelegate
+  }()
+
   static var preferences: Preferences = {
     Preferences()
   }()

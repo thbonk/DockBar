@@ -30,7 +30,7 @@ struct ApplicationListView: View {
     VStack {
       HStack {
         Button {
-
+          statusBarController.importDockConfiguration()
         } label: {
           Image(systemName: "square.and.arrow.down")
         }
@@ -38,7 +38,9 @@ struct ApplicationListView: View {
         Spacer()
 
         Button {
-          NSApplication.shared.terminate(self)
+          DispatchQueue.main.async {
+            NSApplication.shared.terminate(self)
+          }
         } label: {
           Image(systemName: "pip.exit")
         }

@@ -63,6 +63,15 @@ class StatusBarController: NSObject, ObservableObject {
     DispatchQueue.main.async {
       NSWorkspace.shared.open(application.url!)
     }
+    DispatchQueue.main.async {
+      self.popover.close()
+    }
+  }
+
+  func importDockConfiguration() {
+    DispatchQueue.main.async {
+      AppDelegate.shared.importDockModel()
+    }
 
     popover.close()
   }
@@ -82,22 +91,12 @@ class StatusBarController: NSObject, ObservableObject {
   }
 
   func popoverHeight() -> Int? {
-    if let screen = screenWithMouse() {
-      let screenHeight = screen.frame.height
-
-      return min(
-        (Int(screenHeight - (NSApplication.shared.mainMenu?.menuBarHeight ?? 64) - 32)),
-        (dockModelProvider.model().applications.count * 32))
+    guard let screenHeight = screenWithMouseHeight() else {
+      return nil
     }
 
-    return nil
-  }
-
-  func screenWithMouse() -> NSScreen? {
-    let mouseLocation = NSEvent.mouseLocation
-    let screens = NSScreen.screens
-    let screenWithMouse = (screens.first { NSMouseInRect(mouseLocation, $0.frame, false) })
-
-    return screenWithMouse
+    return min(
+      (Int(screenHeight - Int((NSApplication.shared.mainMenu?.menuBarHeight ?? 64)) - 32)),
+      (dockModelProvider.model().applications.count * 32))
   }
 }
