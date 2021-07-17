@@ -20,8 +20,12 @@
 
 import AppKit
 
+func mouseLocation() -> NSPoint {
+  return NSEvent.mouseLocation
+}
+
 func screenWithMouseSize() -> NSSize? {
-  let mouseLocation = NSEvent.mouseLocation
+  let mouseLocation = mouseLocation()
   let screens = NSScreen.screens
   let screenWithMouse = (screens.first { NSMouseInRect(mouseLocation, $0.frame, false) })
 

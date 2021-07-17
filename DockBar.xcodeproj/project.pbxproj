@@ -13,6 +13,7 @@
 		E9090448269F6D8A00B38FFA /* DockModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9090447269F6D8A00B38FFA /* DockModelSpec.swift */; };
 		E914156826A1444700D041D7 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E914156726A1444700D041D7 /* Preferences.swift */; };
 		E91C910F26A2B33800003EF7 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91C910E26A2B33800003EF7 /* EventMonitor.swift */; };
+		E91C911126A351B100003EF7 /* ApplicationDockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91C911026A351B100003EF7 /* ApplicationDockView.swift */; };
 		E92AFC9D26A034D9007DFD63 /* Magnet in Frameworks */ = {isa = PBXBuildFile; productRef = E92AFC9C26A034D9007DFD63 /* Magnet */; };
 		E92AFC9F26A03542007DFD63 /* DockPanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92AFC9E26A03542007DFD63 /* DockPanelController.swift */; };
 		E931776B269F4BBC0004B739 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E931776A269F4BBC0004B739 /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 		E914156626A0D94200D041D7 /* DockBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DockBar.entitlements; sourceTree = "<group>"; };
 		E914156726A1444700D041D7 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		E91C910E26A2B33800003EF7 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		E91C911026A351B100003EF7 /* ApplicationDockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDockView.swift; sourceTree = "<group>"; };
 		E92AFC9E26A03542007DFD63 /* DockPanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockPanelController.swift; sourceTree = "<group>"; };
 		E9317763269F4BBA0004B739 /* DockBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DockBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E931776A269F4BBC0004B739 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 		E931779B269F4E4E0004B739 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		E95DA6C426A03B59002266D0 /* DockModelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockModelProvider.swift; sourceTree = "<group>"; };
 		E95DA6C726A03D35002266D0 /* ApplicationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationListView.swift; sourceTree = "<group>"; };
+		E9935E2926A3711400CEA728 /* build_number.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = build_number.xcconfig; sourceTree = SOURCE_ROOT; };
 		E9D594A126A2155B001284FC /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
 		E9EBFBC3269FF43700BD2725 /* DockEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,6 +172,7 @@
 		E9317799269F4C700004B739 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E9935E2926A3711400CEA728 /* build_number.xcconfig */,
 				E914156626A0D94200D041D7 /* DockBar.entitlements */,
 				E931779A269F4CB20004B739 /* Info.plist */,
 				E931776C269F4BBC0004B739 /* Main.storyboard */,
@@ -181,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				E95DA6C726A03D35002266D0 /* ApplicationListView.swift */,
+				E91C911026A351B100003EF7 /* ApplicationDockView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -200,6 +205,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E9317785269F4BBC0004B739 /* Build configuration list for PBXNativeTarget "DockBar" */;
 			buildPhases = (
+				E9935E2826A36E0500CEA728 /* Increment Buildnumber */,
 				E931775F269F4BBA0004B739 /* Sources */,
 				E9317760269F4BBA0004B739 /* Frameworks */,
 				E9317761269F4BBA0004B739 /* Resources */,
@@ -300,12 +306,34 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E9935E2826A36E0500CEA728 /* Increment Buildnumber */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Increment Buildnumber";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=`date \"+%Y%m%d-%H%M%S\"`\necho \"DB_BUILD_NUMBER=$buildNumber\\n\" > build_number.xcconfig\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E931775F269F4BBA0004B739 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				E95DA6C826A03D35002266D0 /* ApplicationListView.swift in Sources */,
+				E91C911126A351B100003EF7 /* ApplicationDockView.swift in Sources */,
 				E91C910F26A2B33800003EF7 /* EventMonitor.swift in Sources */,
 				E92AFC9F26A03542007DFD63 /* DockPanelController.swift in Sources */,
 				E9317798269F4C670004B739 /* AppDelegate.swift in Sources */,
@@ -482,7 +510,8 @@
 				INFOPLIST_FILE = DockBar/Info.plist;
 				INFOPLIST_KEY_CFBundleExecutable = DockBar;
 				INFOPLIST_KEY_CFBundleName = DockBar;
-				INFOPLIST_KEY_CFBundleVersion = 1;
+				INFOPLIST_KEY_CFBundleVersion = "$(DB_BUILD_NUMBER)";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -516,7 +545,8 @@
 				INFOPLIST_FILE = DockBar/Info.plist;
 				INFOPLIST_KEY_CFBundleExecutable = DockBar;
 				INFOPLIST_KEY_CFBundleName = DockBar;
-				INFOPLIST_KEY_CFBundleVersion = 1;
+				INFOPLIST_KEY_CFBundleVersion = "$(DB_BUILD_NUMBER)";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
