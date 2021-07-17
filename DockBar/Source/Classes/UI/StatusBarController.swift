@@ -29,7 +29,6 @@ class StatusBarController: NSObject, ObservableObject {
   private var statusBarItem: NSStatusItem!
   private var popover: NSPopover!
   private var applicationListView: AnyView!
-  private var dockModelProvider = DockModelProvider()
 
 
   // MARK: - Initialization
@@ -56,7 +55,7 @@ class StatusBarController: NSObject, ObservableObject {
     applicationListView =
       AnyView(
         ApplicationListView()
-          .environmentObject(dockModelProvider)
+          .environmentObject(AppDelegate.shared.dockModelProvider)
           .environmentObject(self))
     popover = NSPopover()
     popover.contentViewController = NSHostingController(rootView: applicationListView)
@@ -113,6 +112,6 @@ class StatusBarController: NSObject, ObservableObject {
 
     return min(
       (Int(screenHeight - Int((NSApplication.shared.mainMenu?.menuBarHeight ?? 64)) - 32)),
-      (dockModelProvider.model().applications.count * 32))
+      (AppDelegate.shared.dockModelProvider.model.applications.count * 32))
   }
 }

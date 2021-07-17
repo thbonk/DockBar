@@ -24,7 +24,17 @@ class DockModelProvider: ObservableObject {
 
   // MARK: - Public Properties
 
-  func model() -> DockModel {
+  @Published
+  var updatedAt = Date()
+
+  var model: DockModel {
     return DockModel()
+  }
+
+
+  // MARK: - Public Methods
+
+  func updateModel() {
+    updatedAt = Date()
   }
 }

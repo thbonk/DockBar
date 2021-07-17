@@ -32,7 +32,6 @@ class DockPanelController: NSWindowController, ObservableObject {
   private var hotKey: HotKey!
   private var dockPanel: NSPanel!
   private var applicationDockView: AnyView!
-  private var dockModelProvider = DockModelProvider()
 
 
   // MARK: - Initialization
@@ -53,7 +52,7 @@ class DockPanelController: NSWindowController, ObservableObject {
     applicationDockView =
       AnyView(
         ApplicationDockView()
-          .environmentObject(dockModelProvider)
+          .environmentObject(AppDelegate.shared.dockModelProvider)
           .environmentObject(self))
     dockPanel = makePanel()
     self.window = dockPanel
@@ -101,7 +100,7 @@ class DockPanelController: NSWindowController, ObservableObject {
   }
 
   private func calculateDockPanelCoords() -> (NSPoint, NSSize, Int) {
-    let model = dockModelProvider.model()
+    let model = AppDelegate.shared.dockModelProvider.model
     let mouseLocation = mouseLocation()
     let contentHeight = model.maxIconHeight + 10
     var contentWidth = model.allIconsWidth + model.applications.count * 10

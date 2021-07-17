@@ -60,6 +60,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       .appendingPathComponent("Preferences")
       .appendingPathComponent("com.apple.dock.plist")
   }
+
+
+  // MARK: - Public Properties
+
+  lazy var dockModelProvider: DockModelProvider = {
+    DockModelProvider()
+  }()
   
 
   // MARK: - Private Properties
@@ -110,6 +117,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         case .OK:
           try importDockModel(from: dialog.url!)
           AppDelegate.preferences.dockModelOnceImported = true
+          dockModelProvider.updateModel()
           break
 
         case .cancel, .abort:

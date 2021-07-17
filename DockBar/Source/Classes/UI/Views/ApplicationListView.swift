@@ -70,7 +70,7 @@ struct ApplicationListView: View {
 
   private func ApplicationList() -> AnyView {
     let view = AnyView(
-      List(dockModelProvider.model().applications, id: \.self, selection: $selectedEntry) { app in
+      List(dockModelProvider.model.applications, id: \.self, selection: $selectedEntry) { app in
         HStack {
           Image(nsImage: app.icon!)
           Text(app.label)

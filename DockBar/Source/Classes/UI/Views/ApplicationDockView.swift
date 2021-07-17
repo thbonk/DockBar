@@ -26,7 +26,7 @@ struct ApplicationDockView: View {
   
   var body: some View {
     HStack {
-      ForEach(dockModelProvider.model().applications) { app in
+      ForEach(dockModelProvider.model.applications) { app in
         Image(nsImage: app.icon!).padding(.all, 2)
           .onTapGesture {
             dockPanelController.launch(application: app)
