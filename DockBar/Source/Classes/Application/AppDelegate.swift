@@ -67,7 +67,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @IBOutlet
   private var statusBarController: StatusBarController!
   @IBOutlet
-  private var popupController: PopupController!
+  private var popupController: DockPanelController!
 
 
   // MARK: - NSApplicationDelegate

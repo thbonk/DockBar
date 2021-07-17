@@ -27,4 +27,12 @@ class DockModel {
   public var applications: [DockEntry] {
     return AppDelegate.preferences.persistentApplications
   }
+
+  public var maxIconHeight: Int {
+    return applications.map { entry in Int(entry.icon!.size.height) }.max() ?? 32
+  }
+
+  public var allIconsWidth: Int {
+    return applications.map { entry in Int(entry.icon!.size.width) }.reduce(0, +)
+  }
 }

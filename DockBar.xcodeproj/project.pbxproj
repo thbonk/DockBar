@@ -12,8 +12,9 @@
 		E9090446269F6C5A00B38FFA /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = E9090445269F6C5A00B38FFA /* Nimble */; };
 		E9090448269F6D8A00B38FFA /* DockModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9090447269F6D8A00B38FFA /* DockModelSpec.swift */; };
 		E914156826A1444700D041D7 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E914156726A1444700D041D7 /* Preferences.swift */; };
+		E91C910F26A2B33800003EF7 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91C910E26A2B33800003EF7 /* EventMonitor.swift */; };
 		E92AFC9D26A034D9007DFD63 /* Magnet in Frameworks */ = {isa = PBXBuildFile; productRef = E92AFC9C26A034D9007DFD63 /* Magnet */; };
-		E92AFC9F26A03542007DFD63 /* PopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92AFC9E26A03542007DFD63 /* PopupController.swift */; };
+		E92AFC9F26A03542007DFD63 /* DockPanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92AFC9E26A03542007DFD63 /* DockPanelController.swift */; };
 		E931776B269F4BBC0004B739 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E931776A269F4BBC0004B739 /* Assets.xcassets */; };
 		E931776E269F4BBC0004B739 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E931776C269F4BBC0004B739 /* Main.storyboard */; };
 		E9317798269F4C670004B739 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9317796269F4C670004B739 /* AppDelegate.swift */; };
@@ -39,7 +40,8 @@
 		E9090447269F6D8A00B38FFA /* DockModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockModelSpec.swift; sourceTree = "<group>"; };
 		E914156626A0D94200D041D7 /* DockBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DockBar.entitlements; sourceTree = "<group>"; };
 		E914156726A1444700D041D7 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
-		E92AFC9E26A03542007DFD63 /* PopupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupController.swift; sourceTree = "<group>"; };
+		E91C910E26A2B33800003EF7 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		E92AFC9E26A03542007DFD63 /* DockPanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockPanelController.swift; sourceTree = "<group>"; };
 		E9317763269F4BBA0004B739 /* DockBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DockBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E931776A269F4BBC0004B739 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E931776D269F4BBC0004B739 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -150,7 +152,7 @@
 			children = (
 				E95DA6C626A03D1D002266D0 /* Views */,
 				E931779B269F4E4E0004B739 /* StatusBarController.swift */,
-				E92AFC9E26A03542007DFD63 /* PopupController.swift */,
+				E92AFC9E26A03542007DFD63 /* DockPanelController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				E9317796269F4C670004B739 /* AppDelegate.swift */,
+				E91C910E26A2B33800003EF7 /* EventMonitor.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -303,7 +306,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E95DA6C826A03D35002266D0 /* ApplicationListView.swift in Sources */,
-				E92AFC9F26A03542007DFD63 /* PopupController.swift in Sources */,
+				E91C910F26A2B33800003EF7 /* EventMonitor.swift in Sources */,
+				E92AFC9F26A03542007DFD63 /* DockPanelController.swift in Sources */,
 				E9317798269F4C670004B739 /* AppDelegate.swift in Sources */,
 				E9EBFBC4269FF43700BD2725 /* DockEntry.swift in Sources */,
 				E931779C269F4E4E0004B739 /* StatusBarController.swift in Sources */,

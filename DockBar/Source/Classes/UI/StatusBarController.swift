@@ -25,6 +25,7 @@ class StatusBarController: NSObject, ObservableObject {
 
   // MARK: - Private Properties
 
+  private var eventMonitor: EventMonitor!
   private var statusBarItem: NSStatusItem!
   private var popover: NSPopover!
   private var applicationListView: AnyView!
@@ -34,6 +35,11 @@ class StatusBarController: NSObject, ObservableObject {
   // MARK: - Initialization
 
   override func awakeFromNib() {
+    eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown, .otherMouseDown]) { event in
+      if self.popover.isShown {
+        self.hidePopover(sender: event)
+      }
+    }
     statusBarItem = NSStatusBar.system.statusItem(withLength: 28.0)
 
     if let statusBarButton = statusBarItem.button {
@@ -79,15 +85,25 @@ class StatusBarController: NSObject, ObservableObject {
 
   // MARK: - Private Methods
 
-  @objc private func toggleDockList(sender: NSStatusBarButton) {
+  @objc private func toggleDockList(sender: Any?) {
     if popover.isShown {
-      popover.close()
+      hidePopover(sender: sender)
     } else {
-      if let popoverHeight = popoverHeight() {
-        popover.contentSize = NSSize(width: 240, height: popoverHeight)
-      }
-      popover.show(relativeTo: statusBarItem.button!.bounds, of: statusBarItem.button!, preferredEdge: .maxY)
+      showPopover(sender: sender)
     }
+  }
+
+  private func hidePopover(sender: Any?) {
+    popover.close()
+    eventMonitor.stop()
+  }
+
+  private func showPopover(sender: Any?) {
+    eventMonitor.start()
+    if let popoverHeight = popoverHeight() {
+      popover.contentSize = NSSize(width: 240, height: popoverHeight)
+    }
+    popover.show(relativeTo: statusBarItem.button!.bounds, of: statusBarItem.button!, preferredEdge: .maxY)
   }
 
   func popoverHeight() -> Int? {

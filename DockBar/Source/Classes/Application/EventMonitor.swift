@@ -1,8 +1,8 @@
 //
-//  PopupController.swift
+//  EventMonitor.swift
 //  DockBar
 //
-//  Created by Thomas Bonk on 15.07.21.
+//  Created by Thomas Bonk on 17.07.21.
 //  Copyright 2021 Thomas Bonk.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,31 +18,39 @@
 //  limitations under the License.
 //
 
-import Foundation
-import Magnet
+import AppKit
 
-class PopupController: NSObject {
+class EventMonitor {
 
   // MARK: - Private Properties
 
-  private var keyCombo: KeyCombo!
-  private var hotKey: HotKey!
+  private var monitor: Any?
+  private let mask: NSEvent.EventTypeMask
+  private let handler: (NSEvent?) -> Void
 
 
   // MARK: - Initialization
 
-  override func awakeFromNib() {
-    if let kc = KeyCombo(key: .space, cocoaModifiers: .option) {
-      keyCombo = kc
-      hotKey = HotKey(identifier: "Option + Space", keyCombo: keyCombo, actionQueue: .main, handler: togglePopup(key:))
-      hotKey.register()
-    }
+  public init(mask: NSEvent.EventTypeMask, handler: @escaping (NSEvent?) -> Void) {
+    self.mask = mask
+    self.handler = handler
+  }
+
+  deinit {
+    stop()
   }
 
 
-  // MARK: - Private Properties
+  // MARK: - Public Methods
+  
+  public func start() {
+    monitor = NSEvent.addGlobalMonitorForEvents(matching: mask, handler: handler) as! NSObject
+  }
 
-  private func togglePopup(key: HotKey) {
-
+  public func stop() {
+    if monitor != nil {
+      NSEvent.removeMonitor(monitor!)
+      monitor = nil
+    }
   }
 }
