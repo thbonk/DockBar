@@ -26,16 +26,30 @@ struct ApplicationDockView: View {
   
   var body: some View {
     HStack {
-      ForEach(dockModelProvider.model.applications) { app in
-        Image(nsImage: app.icon!).padding(.all, 2)
-          .onTapGesture {
-            dockPanelController.launch(application: app)
-          }
-      }
+      Spacer()
+      ApplicationTiles()
+      Spacer()
+    }
+  }
+
+
+  // MARK: - Private Methods
+
+  private func ApplicationTiles() -> some View {
+    let model = dockModelProvider.model
+
+    return ForEach(model.applications) { app in
+      Image(nsImage: app.icon!)
+        .padding(.all, 2)
+        .onTapGesture {
+          dockPanelController.launch(application: app)
+        }
     }
   }
 
   // MARK: - Private Properties
+
+  private var columns = Array(repeating: GridItem(.flexible()), count: 5)
 
   @EnvironmentObject
   private var dockModelProvider: DockModelProvider
