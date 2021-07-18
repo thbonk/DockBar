@@ -78,6 +78,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
   // MARK: - NSApplicationDelegate
+    
+  func applicationWillFinishLaunching(_ notification: Notification) {
+    if !AppDelegate.preferences.dockModelOnceImported {
+      DispatchQueue.main.async {
+        self.importDockModel()
+      }
+    }
+  }
   
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     if !AppDelegate.preferences.dockModelOnceImported {
@@ -89,10 +97,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationWillTerminate(_ aNotification: Notification) {
     // Insert code here to tear down your application
-  }
-
-  func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
-    return true
   }
 
 

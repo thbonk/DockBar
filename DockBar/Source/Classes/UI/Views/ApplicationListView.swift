@@ -45,7 +45,7 @@ struct ApplicationListView: View {
           Image(systemName: "pip.exit")
         }
       }
-      .buttonStyle(.plain)
+      .buttonStyle(PlainButtonStyle())
       .padding(.top, 15)
       .padding(.bottom, 5)
       .padding(.horizontal, 10)
