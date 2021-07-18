@@ -42,10 +42,13 @@ class Preferences {
 
   var persistentApplications: [DockEntry] {
     get {
-      let data  = userDefaults.object(forKey: .PersistentApplications) as! Data
-      let entries = try? (NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! [DockEntry])
+      if let data  = userDefaults.object(forKey: .PersistentApplications) as? Data {
+        let entries = try? (NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! [DockEntry])
 
-      return entries ?? []
+        return entries ?? []
+      }
+
+      return []
     }
     set {
       let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: newValue, requiringSecureCoding: false)
