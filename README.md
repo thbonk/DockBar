@@ -15,4 +15,4 @@ The dock content shall be displayed as menu items in the menu bar menu. Via a sh
 4. Copy DockBar to /Programs
 5. Start DockBar
 6. DockBar opens the a File Open panel. In that panel, navigate to `Library > Preferences` and select the file `com.apple.dock.plist`.
-7. You also add EDockBar to your Login Items   
+7. You can also add DockBar to your Login Items   
