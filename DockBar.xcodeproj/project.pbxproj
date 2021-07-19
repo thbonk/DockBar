@@ -24,6 +24,7 @@
 		E95DA6C826A03D35002266D0 /* ApplicationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95DA6C726A03D35002266D0 /* ApplicationListView.swift */; };
 		E9D594A226A2155B001284FC /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D594A126A2155B001284FC /* ScreenSize.swift */; };
 		E9EBFBC4269FF43700BD2725 /* DockEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBFBC3269FF43700BD2725 /* DockEntry.swift */; };
+		E9FFFED326A541130008A613 /* NSAlert+ShowModalAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FFFED226A541130008A613 /* NSAlert+ShowModalAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		E9935E2926A3711400CEA728 /* build_number.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = build_number.xcconfig; sourceTree = SOURCE_ROOT; };
 		E9D594A126A2155B001284FC /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
 		E9EBFBC3269FF43700BD2725 /* DockEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockEntry.swift; sourceTree = "<group>"; };
+		E9FFFED226A541130008A613 /* NSAlert+ShowModalAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAlert+ShowModalAlert.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				E9317792269F4C670004B739 /* Classes */,
+				E9FFFED026A540DF0008A613 /* Extensions */,
 				E9D594A026A214B5001284FC /* Functions */,
 			);
 			path = Source;
@@ -196,6 +199,22 @@
 				E9D594A126A2155B001284FC /* ScreenSize.swift */,
 			);
 			path = Functions;
+			sourceTree = "<group>";
+		};
+		E9FFFED026A540DF0008A613 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E9FFFED126A540DF0008A613 /* UI */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E9FFFED126A540DF0008A613 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				E9FFFED226A541130008A613 /* NSAlert+ShowModalAlert.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E95DA6C826A03D35002266D0 /* ApplicationListView.swift in Sources */,
+				E9FFFED326A541130008A613 /* NSAlert+ShowModalAlert.swift in Sources */,
 				E91C911126A351B100003EF7 /* ApplicationDockView.swift in Sources */,
 				E91C910F26A2B33800003EF7 /* EventMonitor.swift in Sources */,
 				E92AFC9F26A03542007DFD63 /* DockPanelController.swift in Sources */,
@@ -499,6 +519,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DockBar/DockBar.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -523,6 +544,7 @@
 				MARKETING_VERSION = 2021.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.thbonk.DockBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -534,6 +556,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DockBar/DockBar.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -558,6 +581,7 @@
 				MARKETING_VERSION = 2021.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.thbonk.DockBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};

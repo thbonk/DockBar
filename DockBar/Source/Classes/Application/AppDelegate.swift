@@ -20,16 +20,6 @@
 
 import AppKit
 
-fileprivate extension String {
-  static let PersistentApplications = "persistent-apps"
-  static let GUID                   = "GUID"
-  static let TileData               = "tile-data"
-  static let FileLabel              = "file-label"
-  static let BundleIdentifier       = "bundle-identifier"
-  static let FileData               = "file-data"
-  static let FileURL                = "_CFURLString"
-}
-
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -51,6 +41,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   static var userDirectory: URL {
     FileManager.default.urls(for: .userDirectory, in: .allDomainsMask)[0]
+  }
+
+  static var preferencesFolderUrl: URL {
+    return AppDelegate.userDirectory
+      .appendingPathComponent(NSUserName())
+      .appendingPathComponent("Library")
+      .appendingPathComponent("Preferences")
   }
 
   static var dockConfigurationUrl: URL {
@@ -78,21 +75,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
   // MARK: - NSApplicationDelegate
-    
-  func applicationWillFinishLaunching(_ notification: Notification) {
-    if !AppDelegate.preferences.dockModelOnceImported {
-      DispatchQueue.main.async {
-        self.importDockModel()
-      }
-    }
-  }
   
   func applicationDidFinishLaunching(_ aNotification: Notification) {
-    if !AppDelegate.preferences.dockModelOnceImported {
-      DispatchQueue.main.async {
-        self.importDockModel()
-      }
+    if AppDelegate.preferences.preferencesFolderUrl == nil {
+      grantAccessToPreferencesFolder()
     }
+
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {
@@ -100,74 +88,110 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
 
-  // MARK: - Public Methods
+  // MARK: - Private Methods
 
-  func importDockModel() {
-    let dialog = NSOpenPanel();
+  private func grantAccessToPreferencesFolder() {
+    var url = AppDelegate.preferencesFolderUrl
 
-    dialog.title = "Select 'com.apple.dock.plist' to import it!"
-    dialog.message = "Select 'com.apple.dock.plist' to import it!"
-    dialog.canChooseDirectories = false
-    dialog.canChooseFiles = true
+    showGrantAccessInformation()
+    guard retrievePreferencesFolderUrl(into: &url) else {
+      showAccessNotGrantedError()
+      return
+    }
+
+    AppDelegate.preferences.preferencesFolderUrl = url
+
+    // check whether is possible to read the Dock configuration
+    do {
+      guard  let url = AppDelegate.preferences.dockConfigurationUrl else {
+        showDockConfigurationUrlNotAvailableError()
+        return
+      }
+
+      _ = try Data(contentsOf: url)
+    } catch {
+      showDockConfigurationReadError(error)
+      NSLog("\(error)")
+    }
+  }
+
+  private func retrievePreferencesFolderUrl(into url: inout URL) -> Bool {
+    let dialog = NSOpenPanel()
+
+    dialog.title = "Please select the folder \(AppDelegate.preferencesFolderUrl.path)"
+    dialog.message = "Please select the folder \(AppDelegate.preferencesFolderUrl.path)"
+    dialog.canChooseDirectories = true
+    dialog.canChooseFiles = false
     dialog.canHide = false
     dialog.isAccessoryViewDisclosed = false
     dialog.showsTagField = false
     dialog.canCreateDirectories = false
-    dialog.directoryURL = AppDelegate.dockConfigurationUrl
+    dialog.directoryURL = AppDelegate.preferencesFolderUrl
     dialog.allowsMultipleSelection = false
 
-    do {
-      switch dialog.runModal() {
-        case .OK:
-          try importDockModel(from: dialog.url!)
-          AppDelegate.preferences.dockModelOnceImported = true
-          dockModelProvider.updateModel()
-          break
+    switch dialog.runModal() {
+      case .OK:
+        if dialog.url?.path != AppDelegate.preferencesFolderUrl.path {
+          return false
+        }
+        url = dialog.url!
+        return true
 
-        case .cancel, .abort:
-          break
-
-        default:
-          break
+      default:
+        return false
       }
-    } catch {
-      // TODO Show error
-    }
   }
 
-
-  // MARK: - Private Methods
-
-  private func importDockModel(from url: URL) throws {
-    guard let dockConfiguration = NSDictionary(contentsOf: url) as? Dictionary<String, Any> else {
-      throw ApplicationError.importDockModelError
-    }
-
-    if let persistentApplications = dockConfiguration[.PersistentApplications] as? Array<Dictionary<String, Any>> {
-      AppDelegate.preferences.persistentApplications = persistentApplications.map(toDockEntry(app:))
-    }
+  private func showGrantAccessInformation() {
+    NSAlert
+      .showModalAlert(
+        style: .informational,
+        messageText: "DockBar requires access to the macOS Dock configuration. In the next step, you have to select " +
+                     "that folder, such that access is granted by macOS.",
+        informativeText: "Only the file \(AppDelegate.dockConfigurationUrl.path) is read, no other file is accessed " +
+                         "by DockBar. After pusching the OK button, a File Open Panel is displayed with the folder " +
+                         "\(AppDelegate.preferencesFolderUrl.path) selected. Just push the Open button and access is " +
+                         "granted.",
+        buttons: ["OK"])
   }
 
-  private func toDockEntry(app: Dictionary<String, Any>) -> DockEntry {
-    let tileData = toDictionary(app[.TileData]!)
-    let id = toInt(app[.GUID]!)
-    let label = toString(tileData[.FileLabel]!)
-    let bundleIdentifier = toString(tileData[.BundleIdentifier]!)
-    let url = URL(string: toString(toDictionary(tileData[.FileData]!)[.FileURL]!))
+  private func showAccessNotGrantedError() {
+    NSAlert
+      .showModalAlert(
+        style: .critical,
+        messageText: "You haven't granted acces to the folder \(AppDelegate.preferencesFolderUrl.path).",
+        informativeText: "DockBar can't be started, since it requires read access to the macOS Dock configuration " +
+                         "located at \(AppDelegate.dockConfigurationUrl.path). DockBar is going to be terminated." +
+                         " You can restart it and grant acces then.",
+        buttons: ["Quit"])
 
-    return DockEntry(id: id, label: label, bundleIdentifier: bundleIdentifier, url: url)
+    NSApplication.shared.terminate(self)
   }
 
-  private func toInt(_ data: Any) -> Int {
-    return Int(truncating: (data as! NSNumber))
+  private func showDockConfigurationUrlNotAvailableError() {
+    NSAlert
+      .showModalAlert(
+        style: .critical,
+        messageText: "It wasn't possible to grant access to the folder\(AppDelegate.preferencesFolderUrl.path).",
+        informativeText: "DockBar can't be started, since it requires read access to the macOS Dock configuration " +
+        "located at \(AppDelegate.dockConfigurationUrl.path). DockBar is going to be terminated." +
+        " You can restart it and grant acces then.",
+        buttons: ["Quit"])
+
+    NSApplication.shared.terminate(self)
   }
 
-  private func toDictionary(_ data: Any) -> Dictionary<String, Any> {
-    return data as! Dictionary<String, Any>
-  }
+  private func showDockConfigurationReadError(_ error: Error) {
+    NSAlert
+      .showModalAlert(
+        style: .critical,
+        messageText: "An error occured while reading the macOS Dock configuration.",
+        informativeText: "DockBar can't be started, since it requires to read the macOS Dock configuration " +
+        "located at \(AppDelegate.dockConfigurationUrl.path). DockBar is going to be terminated." +
+        " You can restart it to try reading the configuration again. The error was:\n\(error)",
+        buttons: ["Quit"])
 
-  private func toString(_ data: Any) -> String {
-    return data as! String
+    NSApplication.shared.terminate(self)
   }
 }
 

@@ -29,12 +29,6 @@ struct ApplicationListView: View {
   var body: some View {
     VStack {
       HStack {
-        Button {
-          statusBarController.importDockConfiguration()
-        } label: {
-          Image(systemName: "square.and.arrow.down")
-        }
-
         Spacer()
 
         Button {
@@ -69,26 +63,30 @@ struct ApplicationListView: View {
   // MARK: - Private Methods
 
   private func ApplicationList() -> AnyView {
-    let view = AnyView(
-      List(dockModelProvider.model.applications, id: \.self, selection: $selectedEntry) { app in
-        HStack {
-          Image(nsImage: app.icon!)
-          Text(app.label)
-          Spacer()
-        }
-        .padding(.all, 3)
-        .cornerRadius(5)
-    })
+    do {
+      let view = AnyView(
+        List(try dockModelProvider.model().applications, id: \.self, selection: $selectedEntry) { app in
+          HStack {
+            Image(nsImage: app.icon!)
+            Text(app.label)
+            Spacer()
+          }
+          .padding(.all, 3)
+          .cornerRadius(5)
+      })
 
-    DispatchQueue.main.async {
-      if let entry = self.selectedEntry {
-        DispatchQueue.main.async {
-          self.statusBarController.launch(application: entry)
+      DispatchQueue.main.async {
+        if let entry = self.selectedEntry {
+          DispatchQueue.main.async {
+            self.statusBarController.launch(application: entry)
+          }
         }
       }
-    }
 
-    return view
+      return view
+    } catch {
+      return AnyView(Text("Error retrieving the applications from the Dock."))
+    }
   }
 }
 

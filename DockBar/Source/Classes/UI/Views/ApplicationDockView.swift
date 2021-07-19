@@ -35,15 +35,20 @@ struct ApplicationDockView: View {
 
   // MARK: - Private Methods
 
-  private func ApplicationTiles() -> some View {
-    let model = dockModelProvider.model
+  private func ApplicationTiles() -> AnyView {
+    do {
+      let model = try dockModelProvider.model()
 
-    return ForEach(model.applications) { app in
-      Image(nsImage: app.icon!)
-        .padding(.all, 2)
-        .onTapGesture {
-          dockPanelController.launch(application: app)
-        }
+      return AnyView(
+        ForEach(model.applications) { app in
+        Image(nsImage: app.icon!)
+          .padding(.all, 2)
+          .onTapGesture {
+            dockPanelController.launch(application: app)
+          }
+      })
+    } catch {
+      return AnyView(Text("Error while retrieving the applications from the Dock."))
     }
   }
 

@@ -1,8 +1,8 @@
 //
-//  DockModelProvider.swift
+//  NSAlert+ShowModalAlert.swift
 //  DockBar
 //
-//  Created by Thomas Bonk on 15.07.21.
+//  Created by Thomas Bonk on 19.07.21.
 //  Copyright 2021 Thomas Bonk.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,13 +18,26 @@
 //  limitations under the License.
 //
 
-import Foundation
+import AppKit
 
-class DockModelProvider: ObservableObject {
+extension NSAlert {
 
-  // MARK: - Public Methods
+  @discardableResult
+  static func showModalAlert(
+    style: NSAlert.Style,
+    messageText: String,
+    informativeText: String,
+    buttons: [String]) -> NSApplication.ModalResponse {
 
-  func model() throws -> DockModel {
-    return try DockModel(from: AppDelegate.dockConfigurationUrl)
+    let alert = NSAlert()
+
+    alert.alertStyle = style
+    alert.messageText = messageText
+    alert.informativeText = informativeText
+    buttons.forEach { title in
+      alert.addButton(withTitle: title)
+    }
+
+    return alert.runModal()
   }
 }

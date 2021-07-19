@@ -76,23 +76,27 @@ class DockPanelController: NSWindowController, ObservableObject {
   }
 
   private func showDockPanel() {
-    NSApp.activate(ignoringOtherApps: true)
+    do {
+      NSApp.activate(ignoringOtherApps: true)
 
-    applicationDockView =
-      AnyView(
-        ApplicationDockView()
-          .environmentObject(AppDelegate.shared.dockModelProvider)
-          .environmentObject(self))
-    dockPanel.contentViewController = NSHostingController(rootView: applicationDockView)
+      applicationDockView =
+        AnyView(
+          ApplicationDockView()
+            .environmentObject(AppDelegate.shared.dockModelProvider)
+            .environmentObject(self))
+      dockPanel.contentViewController = NSHostingController(rootView: applicationDockView)
 
-    let coords = calculateDockPanelCoords()
-    dockPanel.setFrameOrigin(coords.0)
-    dockPanel.setContentSize(coords.1)
-    dockPanel.orderFrontRegardless()
+      let coords = try calculateDockPanelCoords()
+      dockPanel.setFrameOrigin(coords.0)
+      dockPanel.setContentSize(coords.1)
+      dockPanel.orderFrontRegardless()
+    } catch {
+      // TODO
+    }
   }
 
-  private func calculateDockPanelCoords() -> (NSPoint, NSSize) {
-    let model = AppDelegate.shared.dockModelProvider.model
+  private func calculateDockPanelCoords() throws -> (NSPoint, NSSize) {
+    let model = try AppDelegate.shared.dockModelProvider.model()
     let mouseLocation = mouseLocation()
     let screenWidth = screenWithMouseWidth()!
     let contentHeight = model.maxIconHeight

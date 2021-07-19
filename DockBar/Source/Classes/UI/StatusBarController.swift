@@ -73,14 +73,6 @@ class StatusBarController: NSObject, ObservableObject {
     }
   }
 
-  func importDockConfiguration() {
-    DispatchQueue.main.async {
-      AppDelegate.shared.importDockModel()
-    }
-
-    popover.close()
-  }
-
 
   // MARK: - Private Methods
 
@@ -99,19 +91,21 @@ class StatusBarController: NSObject, ObservableObject {
 
   private func showPopover(sender: Any?) {
     eventMonitor.start()
-    if let popoverHeight = popoverHeight() {
+    if let popoverHeight = try? popoverHeight() {
       popover.contentSize = NSSize(width: 240, height: popoverHeight)
     }
     popover.show(relativeTo: statusBarItem.button!.bounds, of: statusBarItem.button!, preferredEdge: .maxY)
   }
 
-  func popoverHeight() -> Int? {
+  func popoverHeight() throws -> Int? {
+    let model = try AppDelegate.shared.dockModelProvider.model()
+
     guard let screenHeight = screenWithMouseHeight() else {
       return nil
     }
 
     return min(
       (Int(screenHeight - Int((NSApplication.shared.mainMenu?.menuBarHeight ?? 64)) - 32)),
-      (AppDelegate.shared.dockModelProvider.model.applications.count * 32))
+      (model.applications.count * 32))
   }
 }
