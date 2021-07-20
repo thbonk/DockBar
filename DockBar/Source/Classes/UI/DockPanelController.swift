@@ -83,7 +83,9 @@ class DockPanelController: NSWindowController, ObservableObject {
         AnyView(
           ApplicationDockView()
             .environmentObject(AppDelegate.shared.dockModelProvider)
-            .environmentObject(self))
+            .environmentObject(self)
+            .background(Color(cgColor: NSColor.controlColor.cgColor))
+            .cornerRadius(5))
       dockPanel.contentViewController = NSHostingController(rootView: applicationDockView)
 
       let coords = try calculateDockPanelCoords()
@@ -91,7 +93,11 @@ class DockPanelController: NSWindowController, ObservableObject {
       dockPanel.setContentSize(coords.1)
       dockPanel.orderFrontRegardless()
     } catch {
-      // TODO
+      NSAlert.showModalAlert(
+                  style: .critical,
+            messageText: "Error while reading the macOS Dock configuration.",
+        informativeText: "The error is \(error)",
+                buttons: ["OK"])
     }
   }
 
@@ -100,7 +106,7 @@ class DockPanelController: NSWindowController, ObservableObject {
     let mouseLocation = mouseLocation()
     let screenWidth = screenWithMouseWidth()!
     let contentHeight = model.maxIconHeight
-    var contentWidth = model.allIconsWidth + model.applications.count * 10
+    var contentWidth = model.allIconsWidth + model.applications.count * 10 + 96
 
     if contentWidth > screenWidth {
       contentWidth = screenWidth
@@ -108,7 +114,7 @@ class DockPanelController: NSWindowController, ObservableObject {
 
     let xPos = Int((screenWidth - contentWidth) / 2)
 
-    return (NSPoint(x: xPos, y: Int(mouseLocation.y)), NSSize(width: contentWidth, height: contentHeight))
+    return (NSPoint(x: xPos, y: Int(mouseLocation.y)), NSSize(width: contentWidth, height: contentHeight + 10))
   }
 
   private func makePanel() -> NSPanel {

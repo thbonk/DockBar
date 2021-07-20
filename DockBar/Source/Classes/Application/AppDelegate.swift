@@ -80,7 +80,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if AppDelegate.preferences.preferencesFolderUrl == nil {
       grantAccessToPreferencesFolder()
     }
-
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {
@@ -91,107 +90,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   // MARK: - Private Methods
 
   private func grantAccessToPreferencesFolder() {
-    var url = AppDelegate.preferencesFolderUrl
+    let windowController = StoryboardScene.Main.setupWizardWindowController.instantiate()
 
-    showGrantAccessInformation()
-    guard retrievePreferencesFolderUrl(into: &url) else {
-      showAccessNotGrantedError()
-      return
-    }
-
-    AppDelegate.preferences.preferencesFolderUrl = url
-
-    // check whether is possible to read the Dock configuration
-    do {
-      guard  let url = AppDelegate.preferences.dockConfigurationUrl else {
-        showDockConfigurationUrlNotAvailableError()
-        return
-      }
-
-      _ = try Data(contentsOf: url)
-    } catch {
-      showDockConfigurationReadError(error)
-      NSLog("\(error)")
-    }
-  }
-
-  private func retrievePreferencesFolderUrl(into url: inout URL) -> Bool {
-    let dialog = NSOpenPanel()
-
-    dialog.title = "Please select the folder \(AppDelegate.preferencesFolderUrl.path)"
-    dialog.message = "Please select the folder \(AppDelegate.preferencesFolderUrl.path)"
-    dialog.canChooseDirectories = true
-    dialog.canChooseFiles = false
-    dialog.canHide = false
-    dialog.isAccessoryViewDisclosed = false
-    dialog.showsTagField = false
-    dialog.canCreateDirectories = false
-    dialog.directoryURL = AppDelegate.preferencesFolderUrl
-    dialog.allowsMultipleSelection = false
-
-    switch dialog.runModal() {
-      case .OK:
-        if dialog.url?.path != AppDelegate.preferencesFolderUrl.path {
-          return false
-        }
-        url = dialog.url!
-        return true
-
-      default:
-        return false
-      }
-  }
-
-  private func showGrantAccessInformation() {
-    NSAlert
-      .showModalAlert(
-        style: .informational,
-        messageText: "DockBar requires access to the macOS Dock configuration. In the next step, you have to select " +
-                     "that folder, such that access is granted by macOS.",
-        informativeText: "Only the file \(AppDelegate.dockConfigurationUrl.path) is read, no other file is accessed " +
-                         "by DockBar. After pusching the OK button, a File Open Panel is displayed with the folder " +
-                         "\(AppDelegate.preferencesFolderUrl.path) selected. Just push the Open button and access is " +
-                         "granted.",
-        buttons: ["OK"])
-  }
-
-  private func showAccessNotGrantedError() {
-    NSAlert
-      .showModalAlert(
-        style: .critical,
-        messageText: "You haven't granted acces to the folder \(AppDelegate.preferencesFolderUrl.path).",
-        informativeText: "DockBar can't be started, since it requires read access to the macOS Dock configuration " +
-                         "located at \(AppDelegate.dockConfigurationUrl.path). DockBar is going to be terminated." +
-                         " You can restart it and grant acces then.",
-        buttons: ["Quit"])
-
-    NSApplication.shared.terminate(self)
-  }
-
-  private func showDockConfigurationUrlNotAvailableError() {
-    NSAlert
-      .showModalAlert(
-        style: .critical,
-        messageText: "It wasn't possible to grant access to the folder\(AppDelegate.preferencesFolderUrl.path).",
-        informativeText: "DockBar can't be started, since it requires read access to the macOS Dock configuration " +
-        "located at \(AppDelegate.dockConfigurationUrl.path). DockBar is going to be terminated." +
-        " You can restart it and grant acces then.",
-        buttons: ["Quit"])
-
-    NSApplication.shared.terminate(self)
-  }
-
-  private func showDockConfigurationReadError(_ error: Error) {
-    NSAlert
-      .showModalAlert(
-        style: .critical,
-        messageText: "An error occured while reading the macOS Dock configuration.",
-        informativeText: "DockBar can't be started, since it requires to read the macOS Dock configuration " +
-        "located at \(AppDelegate.dockConfigurationUrl.path). DockBar is going to be terminated." +
-        " You can restart it to try reading the configuration again. The error was:\n\(error)",
-        buttons: ["Quit"])
-
-    NSApplication.shared.terminate(self)
+    windowController.showWindow(self)
+    windowController.window?.makeKeyAndOrderFront(self)
+    windowController.window?.orderFrontRegardless()
   }
 }
 

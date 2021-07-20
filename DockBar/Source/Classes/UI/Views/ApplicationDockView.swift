@@ -42,12 +42,18 @@ struct ApplicationDockView: View {
       return AnyView(
         ForEach(model.applications) { app in
         Image(nsImage: app.icon!)
-          .padding(.all, 2)
+          .padding(.horizontal, 2)
+          .padding(.vertical, 5)
           .onTapGesture {
             dockPanelController.launch(application: app)
           }
       })
     } catch {
+      NSAlert.showModalAlert(
+                  style: .critical,
+            messageText: "Error while reading the macOS Dock configuration.",
+        informativeText: "The error is \(error)",
+                buttons: ["OK"])
       return AnyView(Text("Error while retrieving the applications from the Dock."))
     }
   }

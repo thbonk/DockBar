@@ -1,0 +1,7 @@
+ib:
+  inputs: DockBar/Base.lproj/Main.storyboard
+  outputs:
+    - templateName: scenes-swift5
+      output: DockBar/Source/Classes/Generated/UI/StoryboardScenes.swift
+    - templateName: segues-swift5
+      output: DockBar/Source/Classes/Generated/UI/StoryboardSegues.swift

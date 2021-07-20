@@ -85,6 +85,11 @@ struct ApplicationListView: View {
 
       return view
     } catch {
+      NSAlert.showModalAlert(
+                  style: .critical,
+            messageText: "Error while reading the macOS Dock configuration.",
+        informativeText: "The error is \(error)",
+                buttons: ["OK"])
       return AnyView(Text("Error retrieving the applications from the Dock."))
     }
   }

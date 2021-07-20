@@ -23,8 +23,14 @@
 		E95DA6C526A03B59002266D0 /* DockModelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95DA6C426A03B59002266D0 /* DockModelProvider.swift */; };
 		E95DA6C826A03D35002266D0 /* ApplicationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95DA6C726A03D35002266D0 /* ApplicationListView.swift */; };
 		E9D594A226A2155B001284FC /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D594A126A2155B001284FC /* ScreenSize.swift */; };
+		E9E73B3A26A6D84E00A5DBBB /* StoryboardSegues.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E73B3826A6D84E00A5DBBB /* StoryboardSegues.swift */; };
+		E9E73B3B26A6D84E00A5DBBB /* StoryboardScenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E73B3926A6D84E00A5DBBB /* StoryboardScenes.swift */; };
+		E9E73B3E26A6D9A300A5DBBB /* SetupWizardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E73B3D26A6D9A300A5DBBB /* SetupWizardView.swift */; };
+		E9E73B4026A6D9D300A5DBBB /* Step1Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E73B3F26A6D9D300A5DBBB /* Step1Information.swift */; };
+		E9E73B4226A75E1B00A5DBBB /* Step2SelectPreferencesFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E73B4126A75E1B00A5DBBB /* Step2SelectPreferencesFolder.swift */; };
 		E9EBFBC4269FF43700BD2725 /* DockEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBFBC3269FF43700BD2725 /* DockEntry.swift */; };
 		E9FFFED326A541130008A613 /* NSAlert+ShowModalAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FFFED226A541130008A613 /* NSAlert+ShowModalAlert.swift */; };
+		E9FFFED726A6D47D0008A613 /* SetupWizardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FFFED626A6D47D0008A613 /* SetupWizardController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,8 +65,15 @@
 		E95DA6C726A03D35002266D0 /* ApplicationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationListView.swift; sourceTree = "<group>"; };
 		E9935E2926A3711400CEA728 /* build_number.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = build_number.xcconfig; sourceTree = SOURCE_ROOT; };
 		E9D594A126A2155B001284FC /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
+		E9E73B3426A6D73400A5DBBB /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
+		E9E73B3826A6D84E00A5DBBB /* StoryboardSegues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardSegues.swift; sourceTree = "<group>"; };
+		E9E73B3926A6D84E00A5DBBB /* StoryboardScenes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardScenes.swift; sourceTree = "<group>"; };
+		E9E73B3D26A6D9A300A5DBBB /* SetupWizardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupWizardView.swift; sourceTree = "<group>"; };
+		E9E73B3F26A6D9D300A5DBBB /* Step1Information.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step1Information.swift; sourceTree = "<group>"; };
+		E9E73B4126A75E1B00A5DBBB /* Step2SelectPreferencesFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step2SelectPreferencesFolder.swift; sourceTree = "<group>"; };
 		E9EBFBC3269FF43700BD2725 /* DockEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockEntry.swift; sourceTree = "<group>"; };
 		E9FFFED226A541130008A613 /* NSAlert+ShowModalAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAlert+ShowModalAlert.swift"; sourceTree = "<group>"; };
+		E9FFFED626A6D47D0008A613 /* SetupWizardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWizardController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +111,7 @@
 		E931775A269F4BBA0004B739 = {
 			isa = PBXGroup;
 			children = (
+				E9E73B3426A6D73400A5DBBB /* swiftgen.yml */,
 				E9317790269F4C2F0004B739 /* README.md */,
 				E931778E269F4C2F0004B739 /* LICENSE.md */,
 				E931778F269F4C2F0004B739 /* .gitignore */,
@@ -147,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				E9317795269F4C670004B739 /* Application */,
+				E9E73B3626A6D84E00A5DBBB /* Generated */,
 				E909043E269F68C800B38FFA /* Model */,
 				E9317793269F4C670004B739 /* UI */,
 			);
@@ -159,6 +174,7 @@
 				E95DA6C626A03D1D002266D0 /* Views */,
 				E931779B269F4E4E0004B739 /* StatusBarController.swift */,
 				E92AFC9E26A03542007DFD63 /* DockPanelController.swift */,
+				E9FFFED626A6D47D0008A613 /* SetupWizardController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -189,6 +205,7 @@
 			children = (
 				E95DA6C726A03D35002266D0 /* ApplicationListView.swift */,
 				E91C911026A351B100003EF7 /* ApplicationDockView.swift */,
+				E9E73B3C26A6D9A300A5DBBB /* SetupWizard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -199,6 +216,33 @@
 				E9D594A126A2155B001284FC /* ScreenSize.swift */,
 			);
 			path = Functions;
+			sourceTree = "<group>";
+		};
+		E9E73B3626A6D84E00A5DBBB /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				E9E73B3726A6D84E00A5DBBB /* UI */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		E9E73B3726A6D84E00A5DBBB /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				E9E73B3826A6D84E00A5DBBB /* StoryboardSegues.swift */,
+				E9E73B3926A6D84E00A5DBBB /* StoryboardScenes.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		E9E73B3C26A6D9A300A5DBBB /* SetupWizard */ = {
+			isa = PBXGroup;
+			children = (
+				E9E73B3D26A6D9A300A5DBBB /* SetupWizardView.swift */,
+				E9E73B3F26A6D9D300A5DBBB /* Step1Information.swift */,
+				E9E73B4126A75E1B00A5DBBB /* Step2SelectPreferencesFolder.swift */,
+			);
+			path = SetupWizard;
 			sourceTree = "<group>";
 		};
 		E9FFFED026A540DF0008A613 /* Extensions */ = {
@@ -224,6 +268,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E9317785269F4BBC0004B739 /* Build configuration list for PBXNativeTarget "DockBar" */;
 			buildPhases = (
+				E9E73B3526A6D7CC00A5DBBB /* swiftgen */,
 				E9935E2826A36E0500CEA728 /* Increment Buildnumber */,
 				E931775F269F4BBA0004B739 /* Sources */,
 				E9317760269F4BBA0004B739 /* Frameworks */,
@@ -344,6 +389,24 @@
 			shellPath = /bin/sh;
 			shellScript = "buildNumber=`date \"+%Y%m%d-%H%M%S\"`\necho \"DB_BUILD_NUMBER=$buildNumber\\n\" > build_number.xcconfig\n";
 		};
+		E9E73B3526A6D7CC00A5DBBB /* swiftgen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = swiftgen;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "swiftgen\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -351,9 +414,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9FFFED726A6D47D0008A613 /* SetupWizardController.swift in Sources */,
 				E95DA6C826A03D35002266D0 /* ApplicationListView.swift in Sources */,
 				E9FFFED326A541130008A613 /* NSAlert+ShowModalAlert.swift in Sources */,
 				E91C911126A351B100003EF7 /* ApplicationDockView.swift in Sources */,
+				E9E73B4026A6D9D300A5DBBB /* Step1Information.swift in Sources */,
+				E9E73B4226A75E1B00A5DBBB /* Step2SelectPreferencesFolder.swift in Sources */,
 				E91C910F26A2B33800003EF7 /* EventMonitor.swift in Sources */,
 				E92AFC9F26A03542007DFD63 /* DockPanelController.swift in Sources */,
 				E9317798269F4C670004B739 /* AppDelegate.swift in Sources */,
@@ -361,6 +427,9 @@
 				E931779C269F4E4E0004B739 /* StatusBarController.swift in Sources */,
 				E9090440269F68EF00B38FFA /* DockModel.swift in Sources */,
 				E9D594A226A2155B001284FC /* ScreenSize.swift in Sources */,
+				E9E73B3B26A6D84E00A5DBBB /* StoryboardScenes.swift in Sources */,
+				E9E73B3A26A6D84E00A5DBBB /* StoryboardSegues.swift in Sources */,
+				E9E73B3E26A6D9A300A5DBBB /* SetupWizardView.swift in Sources */,
 				E914156826A1444700D041D7 /* Preferences.swift in Sources */,
 				E95DA6C526A03B59002266D0 /* DockModelProvider.swift in Sources */,
 			);

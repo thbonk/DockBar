@@ -47,6 +47,11 @@ class Preferences {
         let data = try url.bookmarkData()
         userDefaults.set(data, forKey: .PreferencesFolderUrl)
       } catch {
+        NSAlert.showModalAlert(
+                    style: .critical,
+              messageText: "Error while granting read access to the Preferences folder.",
+          informativeText: "The error is \(error)",
+                  buttons: ["OK"])
         NSLog("\(error)")
       }
     }
