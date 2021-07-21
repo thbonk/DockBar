@@ -62,6 +62,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   // MARK: - Public Properties
 
+  let windowController = StoryboardScene.Main.setupWizardWindowController.instantiate()
+  lazy var window: NSWindow? = {
+    self.windowController.window
+  }()
+
   lazy var dockModelProvider: DockModelProvider = {
     DockModelProvider()
   }()

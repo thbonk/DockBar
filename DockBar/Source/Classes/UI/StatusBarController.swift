@@ -28,7 +28,6 @@ class StatusBarController: NSObject, ObservableObject {
   private var eventMonitor: EventMonitor!
   private var statusBarItem: NSStatusItem!
   private var popover: NSPopover!
-  //private var applicationListView: AnyView!
 
 
   // MARK: - Initialization
@@ -67,6 +66,14 @@ class StatusBarController: NSObject, ObservableObject {
     }
   }
 
+  func aboutDockBar() {
+    NSApplication.shared.orderFrontStandardAboutPanel(self)
+  }
+
+  func quitDockBar() {
+    NSApplication.shared.terminate(self)
+  }
+
 
   // MARK: - Private Methods
 
@@ -100,14 +107,16 @@ class StatusBarController: NSObject, ObservableObject {
   }
 
   func popoverHeight() throws -> Int? {
-    let model = try AppDelegate.shared.dockModelProvider.model()
+    // TODO Calculate the height and the width of the popup
+    return 512
+    /*let model = try AppDelegate.shared.dockModelProvider.model()
 
     guard let screenHeight = screenWithMouseHeight() else {
       return nil
     }
 
     return min(
-      (Int(screenHeight - Int((NSApplication.shared.mainMenu?.menuBarHeight ?? 64)) - 32)),
-      (model.applications.count * 32))
+      (Int(screenHeight - Int((NSApplication.shared.mainMenu?.menuBarHeight ?? 64)) - 64)),
+      (model.applications.count * 32))*/
   }
 }

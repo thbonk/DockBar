@@ -104,15 +104,15 @@ class DockPanelController: NSWindowController, ObservableObject {
   private func calculateDockPanelCoords() throws -> (NSPoint, NSSize) {
     let model = try AppDelegate.shared.dockModelProvider.model()
     let mouseLocation = mouseLocation()
-    let screenWidth = screenWithMouseWidth()!
+    let screenFrame = screenWithMouse()!.frame
+    let screenWidth = Int(screenFrame.size.width)
     let contentHeight = model.maxIconHeight
     var contentWidth = model.allIconsWidth + model.applications.count * 10 + Int(Double(model.applications.count) * 2.5)
 
     if contentWidth > screenWidth {
       contentWidth = screenWidth
     }
-    
-    let screenFrame = screenWithMouse()!.frame
+
     let xPos = Int(screenFrame.origin.x) + Int((screenWidth - contentWidth) / 2)
     
     return (NSPoint(x: xPos, y: Int(mouseLocation.y)), NSSize(width: contentWidth, height: contentHeight + 10))

@@ -28,18 +28,17 @@ struct ApplicationListView: View {
 
   var body: some View {
     VStack {
-      HStack {
-        Spacer()
-
-        Button {
-          DispatchQueue.main.async {
-            NSApplication.shared.terminate(self)
-          }
-        } label: {
-          Image(systemName: "pip.exit")
-        }
+      Menu {
+        Button("About DockBar", action: statusBarController.aboutDockBar)
+        Button("DockBar Help", action: {})
+        Divider()
+        Button("Preferences...", action: {})
+        Divider()
+        Button("Quit DockBar", action: statusBarController.quitDockBar)
+      } label: {
+        Label("Menu", systemImage: "contextualmenu.and.cursorarrow")
       }
-      .buttonStyle(PlainButtonStyle())
+      .menuStyle(BorderlessButtonMenuStyle())
       .padding(.top, 15)
       .padding(.bottom, 5)
       .padding(.horizontal, 10)
