@@ -25,11 +25,13 @@ func mouseLocation() -> NSPoint {
 }
 
 func screenWithMouseSize() -> NSSize? {
-  let mouseLocation = mouseLocation()
-  let screens = NSScreen.screens
-  let screenWithMouse = (screens.first { NSMouseInRect(mouseLocation, $0.frame, false) })
-
-  return screenWithMouse?.frame.size
+  if let screenWithMouse = screenWithMouse() {
+    let scale = screenWithMouse.backingScaleFactor
+      
+    return NSSize(width: screenWithMouse.frame.width * scale, height: screenWithMouse.frame.height * scale)
+  }
+  
+  return nil
 }
 
 func screenWithMouseWidth() -> Int? {
@@ -46,4 +48,11 @@ func screenWithMouseHeight() -> Int? {
   }
 
   return Int(size.height)
+}
+
+func screenWithMouse() -> NSScreen? {
+    let mouseLocation = mouseLocation()
+    let screens = NSScreen.screens
+    
+    return (screens.first { NSMouseInRect(mouseLocation, $0.frame, false) })
 }

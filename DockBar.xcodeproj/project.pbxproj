@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -203,9 +203,9 @@
 		E95DA6C626A03D1D002266D0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E9E73B3C26A6D9A300A5DBBB /* SetupWizard */,
 				E95DA6C726A03D35002266D0 /* ApplicationListView.swift */,
 				E91C911026A351B100003EF7 /* ApplicationDockView.swift */,
-				E9E73B3C26A6D9A300A5DBBB /* SetupWizard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -328,7 +328,7 @@
 				};
 			};
 			buildConfigurationList = E931775E269F4BBA0004B739 /* Build configuration list for PBXProject "DockBar" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -591,7 +591,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GQE994U6EG;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -610,7 +609,6 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 2021.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.thbonk.DockBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -628,7 +626,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GQE994U6EG;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -647,7 +644,6 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 2021.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.thbonk.DockBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
