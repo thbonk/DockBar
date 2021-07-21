@@ -203,9 +203,9 @@
 		E95DA6C626A03D1D002266D0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E9E73B3C26A6D9A300A5DBBB /* SetupWizard */,
 				E95DA6C726A03D35002266D0 /* ApplicationListView.swift */,
 				E91C911026A351B100003EF7 /* ApplicationDockView.swift */,
-				E9E73B3C26A6D9A300A5DBBB /* SetupWizard */,
 			);
 			path = Views;
 			sourceTree = "<group>";

@@ -106,14 +106,15 @@ class DockPanelController: NSWindowController, ObservableObject {
     let mouseLocation = mouseLocation()
     let screenWidth = screenWithMouseWidth()!
     let contentHeight = model.maxIconHeight
-    var contentWidth = model.allIconsWidth + model.applications.count * 10 + 96
+    var contentWidth = model.allIconsWidth + model.applications.count * 10 + Int(Double(model.applications.count) * 2.5)
 
     if contentWidth > screenWidth {
       contentWidth = screenWidth
     }
-
-    let xPos = Int((screenWidth - contentWidth) / 2)
-
+    
+    let screenFrame = screenWithMouse()!.frame
+    let xPos = Int(screenFrame.origin.x) + Int((screenWidth - contentWidth) / 2)
+    
     return (NSPoint(x: xPos, y: Int(mouseLocation.y)), NSSize(width: contentWidth, height: contentHeight + 10))
   }
 
