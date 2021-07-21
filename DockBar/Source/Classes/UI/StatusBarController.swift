@@ -28,7 +28,7 @@ class StatusBarController: NSObject, ObservableObject {
   private var eventMonitor: EventMonitor!
   private var statusBarItem: NSStatusItem!
   private var popover: NSPopover!
-  private var applicationListView: AnyView!
+  //private var applicationListView: AnyView!
 
 
   // MARK: - Initialization
@@ -52,13 +52,7 @@ class StatusBarController: NSObject, ObservableObject {
       statusBarButton.target = self
     }
 
-    applicationListView =
-      AnyView(
-        ApplicationListView()
-          .environmentObject(AppDelegate.shared.dockModelProvider)
-          .environmentObject(self))
     popover = NSPopover()
-    popover.contentViewController = NSHostingController(rootView: applicationListView)
   }
 
 
@@ -91,6 +85,14 @@ class StatusBarController: NSObject, ObservableObject {
 
   private func showPopover(sender: Any?) {
     eventMonitor.start()
+
+    let applicationListView =
+      AnyView(
+        ApplicationListView()
+          .environmentObject(AppDelegate.shared.dockModelProvider)
+          .environmentObject(self))
+    popover.contentViewController = NSHostingController(rootView: applicationListView)
+
     if let popoverHeight = try? popoverHeight() {
       popover.contentSize = NSSize(width: 240, height: popoverHeight)
     }

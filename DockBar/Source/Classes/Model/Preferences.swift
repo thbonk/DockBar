@@ -58,7 +58,7 @@ class Preferences {
   }
 
   var dockConfigurationUrl: URL? {
-    preferencesFolderUrl?.appendingPathComponent("com.apple.dock.plist")
+    return preferencesFolderUrl?.appendingPathComponent("com.apple.dock.plist")
   }
 
 

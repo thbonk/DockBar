@@ -40,6 +40,7 @@ struct Step2SelectPreferencesFolder: View {
       } label: {
         Text("Open Preferences Folder")
       }
+      .disabled(accessGranted)
 
       CheckedResultArea()
         .padding(.top, 20)
@@ -52,6 +53,8 @@ struct Step2SelectPreferencesFolder: View {
   private var openPanelDisplayed = false
   @State
   private var preferencesFolderUrl: URL? = nil
+  @State
+  private var accessGranted = false
 
 
   // MARK: - Private Methods
@@ -74,6 +77,7 @@ struct Step2SelectPreferencesFolder: View {
             .bold()
             .padding(.horizontal, 20))
       } else {
+        accessGranted = true
         AppDelegate.preferences.preferencesFolderUrl = preferencesFolderUrl!
         return AnyView(Text("Access was granted! You can close this window.").bold().padding(.horizontal, 20))
       }

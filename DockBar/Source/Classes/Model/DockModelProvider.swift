@@ -25,6 +25,10 @@ class DockModelProvider: ObservableObject {
   // MARK: - Public Methods
 
   func model() throws -> DockModel {
-    return try DockModel(from: AppDelegate.dockConfigurationUrl)
+    if let url = AppDelegate.preferences.dockConfigurationUrl {
+      return try DockModel(from: url)
+    }
+
+    throw AppDelegate.ApplicationError.notConfigured
   }
 }

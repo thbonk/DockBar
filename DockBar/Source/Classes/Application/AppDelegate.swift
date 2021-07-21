@@ -27,6 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   enum ApplicationError: Error {
     case importDockModelError
+    case notConfigured
   }
 
   // MARK: - Class Properties

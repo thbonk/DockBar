@@ -22,22 +22,23 @@ import AppKit
 
 extension NSAlert {
 
-  @discardableResult
   static func showModalAlert(
     style: NSAlert.Style,
     messageText: String,
     informativeText: String,
-    buttons: [String]) -> NSApplication.ModalResponse {
+    buttons: [String]) {
 
-    let alert = NSAlert()
+    DispatchQueue.main.async {
+      let alert = NSAlert()
 
-    alert.alertStyle = style
-    alert.messageText = messageText
-    alert.informativeText = informativeText
-    buttons.forEach { title in
-      alert.addButton(withTitle: title)
+      alert.alertStyle = style
+      alert.messageText = messageText
+      alert.informativeText = informativeText
+      buttons.forEach { title in
+        alert.addButton(withTitle: title)
+      }
+
+      alert.runModal()
     }
-
-    return alert.runModal()
   }
 }
