@@ -84,7 +84,7 @@ class DockPanelController: NSWindowController, ObservableObject {
           ApplicationDockView()
             .environmentObject(AppDelegate.shared.dockModelProvider)
             .environmentObject(self)
-            .background(Color(cgColor: NSColor.controlColor.cgColor))
+            .background(Color("DockPopupColor"))
             .cornerRadius(5))
       dockPanel.contentViewController = NSHostingController(rootView: applicationDockView)
 
