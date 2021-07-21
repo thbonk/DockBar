@@ -29,7 +29,7 @@ class SetupWizardController: NSHostingController<SetupWizardView> {
     super.init(rootView: SetupWizardView())
   }
 
-  @MainActor @objc required dynamic init?(coder: NSCoder) {
+  @objc required dynamic init?(coder: NSCoder) {
     super.init(rootView: SetupWizardView())
   }
 }
