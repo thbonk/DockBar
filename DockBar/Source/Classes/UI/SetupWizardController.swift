@@ -33,3 +33,13 @@ class SetupWizardController: NSHostingController<SetupWizardView> {
     super.init(rootView: SetupWizardView())
   }
 }
+
+class SetupWizardWindow: NSWindow {
+  override var canBecomeKey: Bool {
+    return true
+  }
+
+  override var canBecomeMain: Bool {
+    return true
+  }
+}
