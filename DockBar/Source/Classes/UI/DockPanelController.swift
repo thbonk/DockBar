@@ -63,6 +63,7 @@ class DockPanelController: NSWindowController, ObservableObject {
 
   private func toggleDockPanel(key: HotKey) {
     showDockPanel()
+
     // TODO toggle panel when still visible
   }
 
@@ -72,6 +73,9 @@ class DockPanelController: NSWindowController, ObservableObject {
   }
 
   private func showDockPanel() {
+    self.dockPanel.becomesKeyOnlyIfNeeded = false
+    self.dockPanel.isFloatingPanel = true
+    
     dockPanel.contentViewController =
       NSHostingController(
         rootView: AnyView(
@@ -82,13 +86,17 @@ class DockPanelController: NSWindowController, ObservableObject {
             .cornerRadius(5)))
 
     DispatchQueue.main.async {
+      NSApp.activate(ignoringOtherApps: true)
+      self.showWindow(self)
+    }
+
+    DispatchQueue.main.async {
       do {
         let coords = try self.calculateDockPanelCoords()
         self.dockPanel.setFrameOrigin(coords.0)
         self.dockPanel.setContentSize(coords.1)
 
         DispatchQueue.main.async {
-          NSApp.activate(ignoringOtherApps: true)
           self.dockPanel.orderFrontRegardless()
         }
       } catch {
