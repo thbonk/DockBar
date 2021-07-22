@@ -32,6 +32,7 @@ struct ApplicationListView: View {
         Button("About DockBar", action: statusBarController.aboutDockBar)
         Button("DockBar Help", action: statusBarController.showHelp)
         Divider()
+        Button("Grant Access to Dock Configuration...", action: statusBarController.grantAccessToPreferencesFolder)
         Button("Preferences...", action: statusBarController.showPreferences)
         Divider()
         Button("Quit DockBar", action: statusBarController.quitDockBar)
