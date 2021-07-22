@@ -93,9 +93,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
 
-  // MARK: - Private Methods
+  // MARK: - Public Methods
 
-  private func grantAccessToPreferencesFolder() {
+  func grantAccessToPreferencesFolder() {
     let windowController = StoryboardScene.Main.setupWizardWindowController.instantiate()
 
     windowController.showWindow(self)

@@ -74,6 +74,11 @@ class StatusBarController: NSObject, ObservableObject {
     NSApplication.shared.showHelp(self)
   }
 
+  func grantAccessToPreferencesFolder() {
+    hidePopover(sender: self)
+    AppDelegate.shared.grantAccessToPreferencesFolder()
+  }
+
   func showPreferences() {
     
   }
