@@ -22,36 +22,43 @@ import Foundation
 import AppKit
 
 fileprivate extension String {
-  static let DockModelOnceImported = "DockModelOnceImported"
-  static let PersistentApplications = "PersistentApplications"
+  static let PreferencesFolderUrl = "PreferencesFolderUrl"
 }
 
 class Preferences {
 
   // MARK: - Public Properties
 
-  var dockModelOnceImported: Bool {
+  var preferencesFolderUrl: URL? {
     get {
-      return userDefaults.bool(forKey: .DockModelOnceImported)
+      if let data = userDefaults.value(forKey: .PreferencesFolderUrl) as? Data {
+        var stale = false
+        return try? URL(resolvingBookmarkData: data, bookmarkDataIsStale: &stale)
+      }
+      return nil
     }
     set {
-      userDefaults.set(newValue, forKey: .DockModelOnceImported)
-      _ = userDefaults.synchronize()
+      guard let url = newValue else {
+        userDefaults.removeObject(forKey: .PreferencesFolderUrl)
+        return
+      }
+
+      do {
+        let data = try url.bookmarkData()
+        userDefaults.set(data, forKey: .PreferencesFolderUrl)
+      } catch {
+        NSAlert.showModalAlert(
+                    style: .critical,
+              messageText: "Error while granting read access to the Preferences folder.",
+          informativeText: "The error is \(error)",
+                  buttons: ["OK"])
+        NSLog("\(error)")
+      }
     }
   }
 
-  var persistentApplications: [DockEntry] {
-    get {
-      let data  = userDefaults.object(forKey: .PersistentApplications) as! Data
-      let entries = try? (NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! [DockEntry])
-
-      return entries ?? []
-    }
-    set {
-      let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: newValue, requiringSecureCoding: false)
-      
-      userDefaults.set(encodedData, forKey: .PersistentApplications)
-    }
+  var dockConfigurationUrl: URL? {
+    return preferencesFolderUrl?.appendingPathComponent("com.apple.dock.plist")
   }
 
 
@@ -63,9 +70,6 @@ class Preferences {
   // MARK: - Initialization
 
   init() {
-    userDefaults.register(defaults: [
-      .DockModelOnceImported : false,
-      .PersistentApplications: [DockEntry]()
-    ])
+    userDefaults.register(defaults: [:])
   }
 }

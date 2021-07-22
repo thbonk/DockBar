@@ -28,8 +28,6 @@ class StatusBarController: NSObject, ObservableObject {
   private var eventMonitor: EventMonitor!
   private var statusBarItem: NSStatusItem!
   private var popover: NSPopover!
-  private var applicationListView: AnyView!
-  private var dockModelProvider = DockModelProvider()
 
 
   // MARK: - Initialization
@@ -53,13 +51,7 @@ class StatusBarController: NSObject, ObservableObject {
       statusBarButton.target = self
     }
 
-    applicationListView =
-      AnyView(
-        ApplicationListView()
-          .environmentObject(dockModelProvider)
-          .environmentObject(self))
     popover = NSPopover()
-    popover.contentViewController = NSHostingController(rootView: applicationListView)
   }
 
 
@@ -74,12 +66,20 @@ class StatusBarController: NSObject, ObservableObject {
     }
   }
 
-  func importDockConfiguration() {
-    DispatchQueue.main.async {
-      AppDelegate.shared.importDockModel()
-    }
+  func aboutDockBar() {
+    NSApplication.shared.orderFrontStandardAboutPanel(self)
+  }
 
-    popover.close()
+  func showHelp() {
+    NSApplication.shared.showHelp(self)
+  }
+
+  func showPreferences() {
+    
+  }
+
+  func quitDockBar() {
+    NSApplication.shared.terminate(self)
   }
 
 
@@ -100,19 +100,31 @@ class StatusBarController: NSObject, ObservableObject {
 
   private func showPopover(sender: Any?) {
     eventMonitor.start()
-    if let popoverHeight = popoverHeight() {
+
+    let applicationListView =
+      AnyView(
+        ApplicationListView()
+          .environmentObject(AppDelegate.shared.dockModelProvider)
+          .environmentObject(self))
+    popover.contentViewController = NSHostingController(rootView: applicationListView)
+
+    if let popoverHeight = try? popoverHeight() {
       popover.contentSize = NSSize(width: 240, height: popoverHeight)
     }
     popover.show(relativeTo: statusBarItem.button!.bounds, of: statusBarItem.button!, preferredEdge: .maxY)
   }
 
-  func popoverHeight() -> Int? {
+  func popoverHeight() throws -> Int? {
+    // TODO Calculate the height and the width of the popup
+    return 512
+    /*let model = try AppDelegate.shared.dockModelProvider.model()
+
     guard let screenHeight = screenWithMouseHeight() else {
       return nil
     }
 
     return min(
-      (Int(screenHeight - Int((NSApplication.shared.mainMenu?.menuBarHeight ?? 64)) - 32)),
-      (dockModelProvider.model().applications.count * 32))
+      (Int(screenHeight - Int((NSApplication.shared.mainMenu?.menuBarHeight ?? 64)) - 64)),
+      (model.applications.count * 32))*/
   }
 }

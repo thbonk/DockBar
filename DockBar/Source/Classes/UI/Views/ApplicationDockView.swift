@@ -26,16 +26,41 @@ struct ApplicationDockView: View {
   
   var body: some View {
     HStack {
-      ForEach(dockModelProvider.model().applications) { app in
-        Image(nsImage: app.icon!).padding(.all, 2)
+      Spacer()
+      ApplicationTiles()
+      Spacer()
+    }
+  }
+
+
+  // MARK: - Private Methods
+
+  private func ApplicationTiles() -> AnyView {
+    do {
+      let model = try dockModelProvider.model()
+
+      return AnyView(
+        ForEach(model.applications) { app in
+        Image(nsImage: app.icon!)
+          .padding(.horizontal, 2)
+          .padding(.vertical, 5)
           .onTapGesture {
             dockPanelController.launch(application: app)
           }
-      }
+      })
+    } catch {
+      NSAlert.showModalAlert(
+                  style: .critical,
+            messageText: "Error while reading the macOS Dock configuration.",
+        informativeText: "The error is \(error)",
+                buttons: ["OK"])
+      return AnyView(Text("Error while retrieving the applications from the Dock."))
     }
   }
 
   // MARK: - Private Properties
+
+  private var columns = Array(repeating: GridItem(.flexible()), count: 5)
 
   @EnvironmentObject
   private var dockModelProvider: DockModelProvider

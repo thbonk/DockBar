@@ -20,13 +20,21 @@
 
 import Foundation
 
+fileprivate extension String {
+  static let PersistentApplications = "persistent-apps"
+  static let GUID                   = "GUID"
+  static let TileData               = "tile-data"
+  static let FileLabel              = "file-label"
+  static let BundleIdentifier       = "bundle-identifier"
+  static let FileData               = "file-data"
+  static let FileURL                = "_CFURLString"
+}
+
 class DockModel {
 
   // MARK: - Public Properties
 
-  public var applications: [DockEntry] {
-    return AppDelegate.preferences.persistentApplications
-  }
+  public private(set) var applications = [DockEntry]()
 
   public var maxIconHeight: Int {
     return applications.map { entry in Int(entry.icon!.size.height) }.max() ?? 32
@@ -34,5 +42,49 @@ class DockModel {
 
   public var allIconsWidth: Int {
     return applications.map { entry in Int(entry.icon!.size.width) }.reduce(0, +)
+  }
+
+
+  // MARK: - Initialization
+
+  init(from url: URL) throws {
+    applications = try importDockModel(from: url)
+  }
+
+
+  // MARK: - Private Methods
+
+  private func importDockModel(from url: URL) throws -> [DockEntry] {
+    guard let dockConfiguration = NSDictionary(contentsOf: url) as? Dictionary<String, Any> else {
+      throw AppDelegate.ApplicationError.importDockModelError
+    }
+
+    if let persistentApplications = dockConfiguration[.PersistentApplications] as? Array<Dictionary<String, Any>> {
+      return persistentApplications.map(toDockEntry(app:))
+    }
+
+    throw AppDelegate.ApplicationError.importDockModelError
+  }
+
+  private func toDockEntry(app: Dictionary<String, Any>) -> DockEntry {
+    let tileData = toDictionary(app[.TileData]!)
+    let id = toInt(app[.GUID]!)
+    let label = toString(tileData[.FileLabel]!)
+    let bundleIdentifier = toString(tileData[.BundleIdentifier]!)
+    let url = URL(string: toString(toDictionary(tileData[.FileData]!)[.FileURL]!))
+
+    return DockEntry(id: id, label: label, bundleIdentifier: bundleIdentifier, url: url)
+  }
+
+  private func toInt(_ data: Any) -> Int {
+    return Int(truncating: (data as! NSNumber))
+  }
+
+  private func toDictionary(_ data: Any) -> Dictionary<String, Any> {
+    return data as! Dictionary<String, Any>
+  }
+
+  private func toString(_ data: Any) -> String {
+    return data as! String
   }
 }

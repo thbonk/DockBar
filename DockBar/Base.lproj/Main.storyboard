@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19115.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19115.2"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -670,7 +672,7 @@
                         </items>
                     </menu>
                     <connections>
-                        <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
+                        <outlet property="delegate" destination="Voe-Tx-rLC" id="S0u-8B-bS2"/>
                     </connections>
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="DockBar" customModuleProvider="target">
@@ -685,6 +687,45 @@
                 <customObject id="abI-2l-Rzw" customClass="DockPanelController" customModule="DockBar" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="K3B-7I-dZ3">
+            <objects>
+                <windowController storyboardIdentifier="SetupWizardWindowController" showSeguePresentationStyle="single" id="52Z-IE-fq3" sceneMemberID="viewController">
+                    <window key="window" title="DockBar Setup" separatorStyle="none" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" toolbarStyle="unified" id="WLF-mi-bV4" customClass="SetupWizardWindow" customModule="DockBar" customModuleProvider="target">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+                        <rect key="contentRect" x="294" y="363" width="500" height="300"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1175"/>
+                        <value key="minSize" type="size" width="500" height="300"/>
+                        <value key="maxSize" type="size" width="500" height="300"/>
+                        <view key="contentView" id="L5M-ut-xrt">
+                            <rect key="frame" x="0.0" y="0.0" width="500" height="300"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </view>
+                        <connections>
+                            <outlet property="delegate" destination="52Z-IE-fq3" id="zQI-oM-2dm"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="3aG-ad-5Cd" kind="relationship" relationship="window.shadowedContentViewController" id="BX0-1v-mVz"/>
+                    </connections>
+                </windowController>
+                <customObject id="ZXB-Yi-gx5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-54" y="396"/>
+        </scene>
+        <!--Setup Wizard Controller-->
+        <scene sceneID="zsP-Ch-RZe">
+            <objects>
+                <viewController id="3aG-ad-5Cd" customClass="SetupWizardController" customModule="DockBar" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="bb1-fX-2Ia">
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="viw-Dr-UC2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-54" y="887"/>
         </scene>
     </scenes>
 </document>

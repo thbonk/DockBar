@@ -1,8 +1,8 @@
 //
-//  DockModelProvider.swift
+//  SetupWizardController.swift
 //  DockBar
 //
-//  Created by Thomas Bonk on 15.07.21.
+//  Created by Thomas Bonk on 20.07.21.
 //  Copyright 2021 Thomas Bonk.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,17 +18,28 @@
 //  limitations under the License.
 //
 
-import Foundation
+import AppKit
+import SwiftUI
 
-class DockModelProvider: ObservableObject {
+class SetupWizardController: NSHostingController<SetupWizardView> {
 
-  // MARK: - Public Methods
+  // MARK: - Initialization
 
-  func model() throws -> DockModel {
-    if let url = AppDelegate.preferences.dockConfigurationUrl {
-      return try DockModel(from: url)
-    }
+  init() {
+    super.init(rootView: SetupWizardView())
+  }
 
-    throw AppDelegate.ApplicationError.notConfigured
+  @objc required dynamic init?(coder: NSCoder) {
+    super.init(rootView: SetupWizardView())
+  }
+}
+
+class SetupWizardWindow: NSWindow {
+  override var canBecomeKey: Bool {
+    return true
+  }
+
+  override var canBecomeMain: Bool {
+    return true
   }
 }
