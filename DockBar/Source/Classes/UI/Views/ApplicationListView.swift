@@ -30,9 +30,9 @@ struct ApplicationListView: View {
     VStack {
       Menu {
         Button("About DockBar", action: statusBarController.aboutDockBar)
-        Button("DockBar Help", action: {})
+        Button("DockBar Help", action: statusBarController.showHelp)
         Divider()
-        Button("Preferences...", action: {})
+        Button("Preferences...", action: statusBarController.showPreferences)
         Divider()
         Button("Quit DockBar", action: statusBarController.quitDockBar)
       } label: {

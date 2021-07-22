@@ -30,7 +30,6 @@ class DockPanelController: NSWindowController, ObservableObject {
   private var keyCombo: KeyCombo!
   private var hotKey: HotKey!
   private var dockPanel: NSPanel!
-  private var applicationDockView: AnyView!
 
 
   // MARK: - Initialization
@@ -63,11 +62,8 @@ class DockPanelController: NSWindowController, ObservableObject {
   // MARK: - Private Methods
 
   private func toggleDockPanel(key: HotKey) {
-    if dockPanel.isVisible {
-      hideDockPanel()
-    } else {
-      showDockPanel()
-    }
+    showDockPanel()
+    // TODO toggle panel when still visible
   }
 
   private func hideDockPanel() {
@@ -76,28 +72,32 @@ class DockPanelController: NSWindowController, ObservableObject {
   }
 
   private func showDockPanel() {
-    do {
-      NSApp.activate(ignoringOtherApps: true)
-
-      applicationDockView =
-        AnyView(
+    dockPanel.contentViewController =
+      NSHostingController(
+        rootView: AnyView(
           ApplicationDockView()
             .environmentObject(AppDelegate.shared.dockModelProvider)
             .environmentObject(self)
             .background(Color("DockPopupColor"))
-            .cornerRadius(5))
-      dockPanel.contentViewController = NSHostingController(rootView: applicationDockView)
+            .cornerRadius(5)))
 
-      let coords = try calculateDockPanelCoords()
-      dockPanel.setFrameOrigin(coords.0)
-      dockPanel.setContentSize(coords.1)
-      dockPanel.orderFrontRegardless()
-    } catch {
-      NSAlert.showModalAlert(
-                  style: .critical,
-            messageText: "Error while reading the macOS Dock configuration.",
-        informativeText: "The error is \(error)",
-                buttons: ["OK"])
+    DispatchQueue.main.async {
+      do {
+        let coords = try self.calculateDockPanelCoords()
+        self.dockPanel.setFrameOrigin(coords.0)
+        self.dockPanel.setContentSize(coords.1)
+
+        DispatchQueue.main.async {
+          NSApp.activate(ignoringOtherApps: true)
+          self.dockPanel.orderFrontRegardless()
+        }
+      } catch {
+        NSAlert.showModalAlert(
+          style: .critical,
+          messageText: "Error while reading the macOS Dock configuration.",
+          informativeText: "The error is \(error)",
+          buttons: ["OK"])
+      }
     }
   }
 

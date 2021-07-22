@@ -70,6 +70,14 @@ class StatusBarController: NSObject, ObservableObject {
     NSApplication.shared.orderFrontStandardAboutPanel(self)
   }
 
+  func showHelp() {
+    NSApplication.shared.showHelp(self)
+  }
+
+  func showPreferences() {
+    
+  }
+
   func quitDockBar() {
     NSApplication.shared.terminate(self)
   }
