@@ -66,27 +66,6 @@ class StatusBarController: NSObject, ObservableObject {
     }
   }
 
-  func aboutDockBar() {
-    NSApplication.shared.orderFrontStandardAboutPanel(self)
-  }
-
-  func showHelp() {
-    NSApplication.shared.showHelp(self)
-  }
-
-  func grantAccessToPreferencesFolder() {
-    hidePopover(sender: self)
-    AppDelegate.shared.grantAccessToPreferencesFolder()
-  }
-
-  func showPreferences() {
-    
-  }
-
-  func quitDockBar() {
-    NSApplication.shared.terminate(self)
-  }
-
 
   // MARK: - Private Methods
 
