@@ -28,22 +28,6 @@ struct ApplicationListView: View {
 
   var body: some View {
     VStack {
-      Menu {
-        Button("About DockBar", action: statusBarController.aboutDockBar)
-        Button("DockBar Help", action: statusBarController.showHelp)
-        Divider()
-        Button("Grant Access to Dock Configuration...", action: statusBarController.grantAccessToPreferencesFolder)
-        Button("Preferences...", action: statusBarController.showPreferences)
-        Divider()
-        Button("Quit DockBar", action: statusBarController.quitDockBar)
-      } label: {
-        Label("Menu", systemImage: "contextualmenu.and.cursorarrow")
-      }
-      .menuStyle(BorderlessButtonMenuStyle())
-      .padding(.top, 15)
-      .padding(.bottom, 5)
-      .padding(.horizontal, 10)
-
       ApplicationList()
     }
   }

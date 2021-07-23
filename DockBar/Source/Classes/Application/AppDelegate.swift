@@ -21,7 +21,7 @@
 import AppKit
 
 @main
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSResponder, NSApplicationDelegate {
 
   // MARK: - Public Enums
 
@@ -95,7 +95,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   // MARK: - Public Methods
 
-  func grantAccessToPreferencesFolder() {
+  @IBAction
+  func grantAccessToPreferencesFolder(_ sender: Any? = nil) {
     let windowController = StoryboardScene.Main.setupWizardWindowController.instantiate()
 
     windowController.showWindow(self)

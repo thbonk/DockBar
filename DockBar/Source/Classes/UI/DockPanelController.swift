@@ -86,25 +86,24 @@ class DockPanelController: NSWindowController, ObservableObject {
             .cornerRadius(5)))
 
     DispatchQueue.main.async {
-      NSApp.activate(ignoringOtherApps: true)
-      self.showWindow(self)
-    }
-
-    DispatchQueue.main.async {
       do {
         let coords = try self.calculateDockPanelCoords()
         self.dockPanel.setFrameOrigin(coords.0)
         self.dockPanel.setContentSize(coords.1)
-
-        DispatchQueue.main.async {
-          self.dockPanel.orderFrontRegardless()
-        }
       } catch {
         NSAlert.showModalAlert(
           style: .critical,
           messageText: "Error while reading the macOS Dock configuration.",
           informativeText: "The error is \(error)",
           buttons: ["OK"])
+      }
+    }
+
+    DispatchQueue.main.async {
+      NSApp.activate(ignoringOtherApps: true)
+      self.showWindow(self)
+      DispatchQueue.main.async {
+        self.dockPanel.orderFrontRegardless()
       }
     }
   }
