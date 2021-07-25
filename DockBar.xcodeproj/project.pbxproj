@@ -600,9 +600,9 @@
 				INFOPLIST_FILE = DockBar/Info.plist;
 				INFOPLIST_KEY_CFBundleExecutable = DockBar;
 				INFOPLIST_KEY_CFBundleName = DockBar;
-				INFOPLIST_KEY_CFBundleVersion = "$(DB_BUILD_NUMBER)";
+				INFOPLIST_KEY_CFBundleVersion = 20210725211419;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (C) 2021 Thomas Bonk. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 by Thomas Bonk. Made with Love in Saarland, Germany.";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -610,7 +610,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 2021.3;
+				MARKETING_VERSION = 2021.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.thbonk.DockBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -637,9 +637,9 @@
 				INFOPLIST_FILE = DockBar/Info.plist;
 				INFOPLIST_KEY_CFBundleExecutable = DockBar;
 				INFOPLIST_KEY_CFBundleName = DockBar;
-				INFOPLIST_KEY_CFBundleVersion = "$(DB_BUILD_NUMBER)";
+				INFOPLIST_KEY_CFBundleVersion = 20210725211419;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (C) 2021 Thomas Bonk. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 by Thomas Bonk. Made with Love in Saarland, Germany.";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -647,7 +647,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 2021.3;
+				MARKETING_VERSION = 2021.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.thbonk.DockBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
