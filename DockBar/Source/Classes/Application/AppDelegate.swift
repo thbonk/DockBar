@@ -70,6 +70,8 @@ class AppDelegate: NSResponder, NSApplicationDelegate {
   lazy var dockModelProvider: DockModelProvider = {
     DockModelProvider()
   }()
+
+  private(set) var isActive = false
   
 
   // MARK: - Private Properties
@@ -90,6 +92,14 @@ class AppDelegate: NSResponder, NSApplicationDelegate {
 
   func applicationWillTerminate(_ aNotification: Notification) {
     // Insert code here to tear down your application
+  }
+
+  func applicationDidBecomeActive(_ notification: Notification) {
+    isActive = true
+  }
+
+  func applicationDidResignActive(_ notification: Notification) {
+    isActive = false
   }
 
 

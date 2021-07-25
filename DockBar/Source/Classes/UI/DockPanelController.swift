@@ -30,6 +30,7 @@ class DockPanelController: NSWindowController, ObservableObject {
   private var keyCombo: KeyCombo!
   private var hotKey: HotKey!
   private var dockPanel: NSPanel!
+  private var frontmostApplication: NSRunningApplication? = nil
 
 
   // MARK: - Initialization
@@ -62,17 +63,24 @@ class DockPanelController: NSWindowController, ObservableObject {
   // MARK: - Private Methods
 
   private func toggleDockPanel(key: HotKey) {
-    showDockPanel()
-
-    // TODO toggle panel when still visible
+    if AppDelegate.shared.isActive {
+      hideDockPanel()
+    } else {
+      showDockPanel()
+    }
   }
 
   private func hideDockPanel() {
-    NSApp.deactivate()
-    dockPanel.close()
+    DispatchQueue.main.async {
+      self.dockPanel.close()
+    }
+    DispatchQueue.main.async {
+      self.frontmostApplication?.activate(options: .activateIgnoringOtherApps)
+    }
   }
 
   private func showDockPanel() {
+    self.frontmostApplication = NSWorkspace.shared.frontmostApplication
     self.dockPanel.becomesKeyOnlyIfNeeded = false
     self.dockPanel.isFloatingPanel = true
     
