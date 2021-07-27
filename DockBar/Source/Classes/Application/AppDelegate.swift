@@ -62,11 +62,6 @@ class AppDelegate: NSResponder, NSApplicationDelegate {
 
   // MARK: - Public Properties
 
-  let windowController = StoryboardScene.Main.setupWizardWindowController.instantiate()
-  lazy var window: NSWindow? = {
-    self.windowController.window
-  }()
-
   lazy var dockModelProvider: DockModelProvider = {
     DockModelProvider()
   }()
@@ -105,13 +100,60 @@ class AppDelegate: NSResponder, NSApplicationDelegate {
 
   // MARK: - Public Methods
 
+  func openDockEntry(entry: DockEntry) {
+    DispatchQueue.main.async {
+      NSWorkspace
+        .shared
+        .open(
+          AppDelegate.preferences.grantedAccessUrl(for: entry.url!),
+          configuration: NSWorkspace.OpenConfiguration()) { app, error in
+
+        guard error == nil else {
+          let pathUrl = entry.url!.deletingLastPathComponent()
+
+          GrantAccessWindowController
+            .grantAccess(
+              to: pathUrl,
+              completed: { folderUrl in
+              
+              if let url = folderUrl {
+                AppDelegate.preferences.storeGrantedAccessUrl(url, for: entry.url!)
+                NSWorkspace.shared.open(url.appendingPathComponent(entry.url!.lastPathComponent))
+              }
+            })
+
+          return
+        }
+      }
+    }
+  }
+
   @IBAction
   func grantAccessToPreferencesFolder(_ sender: Any? = nil) {
-    let windowController = StoryboardScene.Main.setupWizardWindowController.instantiate()
+    GrantAccessWindowController
+      .grantAccess(
+        to: AppDelegate.preferencesFolderUrl,
+        check: checkDockConfigurationFileAccess) { folderUrl in
 
-    windowController.showWindow(self)
-    windowController.window?.makeKeyAndOrderFront(self)
-    windowController.window?.orderFrontRegardless()
+        if let url = folderUrl {
+          AppDelegate.preferences.preferencesFolderUrl = url
+        }
+      }
+  }
+
+
+  // MARK: - Private Methods
+
+  private func checkDockConfigurationFileAccess(_ folderUrl: URL) -> String? {
+    let url = folderUrl.appendingPathComponent("com.apple.dock.plist")
+
+    do {
+      _ = try Data(contentsOf: url)
+    } catch {
+      return "Can't read the macOS Dock configuration. Error was \(error.localizedDescription)"
+    }
+
+    return nil
   }
 }
 

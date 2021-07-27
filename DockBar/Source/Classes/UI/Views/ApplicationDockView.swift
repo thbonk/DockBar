@@ -45,7 +45,7 @@ struct ApplicationDockView: View {
           .padding(.horizontal, 2)
           .padding(.vertical, 5)
           .onTapGesture {
-            dockPanelController.launch(application: app)
+            dockPanelController.openEntry(entry: app)
           }
       })
     } catch {

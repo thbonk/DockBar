@@ -50,10 +50,9 @@ class DockPanelController: NSWindowController, ObservableObject {
 
   // MARK: - Public Methods
 
-  func launch(application: DockEntry) {
-    DispatchQueue.main.async {
-      NSWorkspace.shared.open(application.url!)
-    }
+  func openEntry(entry: DockEntry) {
+    AppDelegate.shared.openDockEntry(entry: entry)
+
     DispatchQueue.main.async {
       self.hideDockPanel()
     }

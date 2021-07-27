@@ -33,7 +33,14 @@ class Preferences {
     get {
       if let data = userDefaults.value(forKey: .PreferencesFolderUrl) as? Data {
         var stale = false
-        return try? URL(resolvingBookmarkData: data, bookmarkDataIsStale: &stale)
+
+        if let url = try? URL(resolvingBookmarkData: data, bookmarkDataIsStale: &stale) {
+          if stale {
+            self.preferencesFolderUrl = url
+          }
+
+          return url
+        }
       }
       return nil
     }
@@ -71,5 +78,27 @@ class Preferences {
 
   init() {
     userDefaults.register(defaults: [:])
+  }
+
+
+  // MARK: - Public Methods
+
+  func grantedAccessUrl(for url: URL) -> URL {
+    if let data = userDefaults.object(forKey: url.path) as? Data {
+      var isStale = false
+      if let grantedAccessUrl = try? URL(resolvingBookmarkData: data, bookmarkDataIsStale: &isStale) {
+        if isStale {
+          storeGrantedAccessUrl(grantedAccessUrl, for: url)
+        }
+
+        return grantedAccessUrl.appendingPathComponent(url.lastPathComponent)
+      }
+    }
+
+    return url
+  }
+
+  func storeGrantedAccessUrl(_ grantedAccessUrl: URL, for url: URL) {
+    userDefaults.setValue(try? grantedAccessUrl.bookmarkData(), forKey: url.path)
   }
 }

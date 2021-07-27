@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19115.2"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -692,46 +693,123 @@
                 <customObject id="JgM-Gl-VtZ" customClass="StatusBarController" customModule="DockBar" customModuleProvider="target"/>
                 <customObject id="abI-2l-Rzw" customClass="DockPanelController" customModule="DockBar" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="-649" y="-248"/>
         </scene>
-        <!--Window Controller-->
-        <scene sceneID="K3B-7I-dZ3">
+        <!--Grant Access Window Controller-->
+        <scene sceneID="iii-a3-b3x">
             <objects>
-                <windowController storyboardIdentifier="SetupWizardWindowController" showSeguePresentationStyle="single" id="52Z-IE-fq3" sceneMemberID="viewController">
-                    <window key="window" title="DockBar Setup" separatorStyle="none" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" toolbarStyle="unified" id="WLF-mi-bV4" customClass="SetupWizardWindow" customModule="DockBar" customModuleProvider="target">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+                <windowController storyboardIdentifier="GrantAccessWindowController" showSeguePresentationStyle="single" id="Rxa-i5-TLa" userLabel="Grant Access Window Controller" customClass="GrantAccessWindowController" customModule="DockBar" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Grant Access" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" toolbarStyle="compact" id="NCG-8f-rdQ">
+                        <windowStyleMask key="styleMask" titled="YES"/>
                         <rect key="contentRect" x="294" y="363" width="500" height="300"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1175"/>
                         <value key="minSize" type="size" width="500" height="300"/>
                         <value key="maxSize" type="size" width="500" height="300"/>
-                        <view key="contentView" id="L5M-ut-xrt">
+                        <value key="minFullScreenContentSize" type="size" width="500" height="300"/>
+                        <value key="maxFullScreenContentSize" type="size" width="500" height="300"/>
+                        <view key="contentView" id="LDA-pa-Edn">
                             <rect key="frame" x="0.0" y="0.0" width="500" height="300"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </view>
                         <connections>
-                            <outlet property="delegate" destination="52Z-IE-fq3" id="zQI-oM-2dm"/>
+                            <outlet property="delegate" destination="Rxa-i5-TLa" id="IzJ-mi-dWI"/>
                         </connections>
                     </window>
                     <connections>
-                        <segue destination="3aG-ad-5Cd" kind="relationship" relationship="window.shadowedContentViewController" id="BX0-1v-mVz"/>
+                        <segue destination="h6T-Gd-Yxr" kind="relationship" relationship="window.shadowedContentViewController" id="Y5X-Ti-rZO"/>
                     </connections>
                 </windowController>
-                <customObject id="ZXB-Yi-gx5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="zlf-bR-Qob" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-54" y="396"/>
+            <point key="canvasLocation" x="-697" y="46"/>
         </scene>
-        <!--Setup Wizard Controller-->
-        <scene sceneID="zsP-Ch-RZe">
+        <!--Grant Access View Controller-->
+        <scene sceneID="AQI-pA-FHy">
             <objects>
-                <viewController id="3aG-ad-5Cd" customClass="SetupWizardController" customModule="DockBar" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="bb1-fX-2Ia">
+                <viewController id="h6T-Gd-Yxr" userLabel="Grant Access View Controller" customClass="GrantAccessViewController" customModule="DockBar" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="goM-QD-8pn">
                         <rect key="frame" x="0.0" y="0.0" width="500" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3g8-Ef-d5u">
+                                <rect key="frame" x="140" y="249" width="220" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="DockBar needs access to the folder" id="KFO-xY-ec3">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZMt-rD-eYv">
+                                <rect key="frame" x="156" y="218" width="188" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="&lt;Folder Name goes here&gt;" id="YUO-Cy-FhV">
+                                    <font key="font" size="13" name="Monaco"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TN9-95-T9n">
+                                <rect key="frame" x="112" y="187" width="277" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Please push this button and open that folder!" id="Ee9-hn-UDT">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cgC-Sb-iyr">
+                                <rect key="frame" x="226" y="119" width="48.5" height="58"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="4lr-IH-jDX"/>
+                                    <constraint firstAttribute="height" constant="48" id="Iu9-KS-L2n"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="ZLc-aI-iC8">
+                                    <imageReference key="image" image="hand.point.down" catalog="system" symbolScale="large"/>
+                                </imageCell>
+                            </imageView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="leL-nG-R1H">
+                                <rect key="frame" x="193" y="82" width="115" height="32"/>
+                                <buttonCell key="cell" type="push" title="Grant Access" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sNl-Sb-tO7">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="openFolderWithSender:" target="h6T-Gd-Yxr" id="jun-wk-giN"/>
+                                </connections>
+                            </button>
+                            <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MsS-OS-nbp">
+                                <rect key="frame" x="193" y="39" width="115" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="&lt;Error Message&gt;" id="VD1-N4-Ef7">
+                                    <font key="font" metaFont="systemBold"/>
+                                    <color key="textColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="leL-nG-R1H" firstAttribute="centerX" secondItem="goM-QD-8pn" secondAttribute="centerX" id="97b-Xh-H6b"/>
+                            <constraint firstItem="cgC-Sb-iyr" firstAttribute="top" secondItem="TN9-95-T9n" secondAttribute="bottom" constant="15" id="BCy-BW-0Az"/>
+                            <constraint firstItem="ZMt-rD-eYv" firstAttribute="top" secondItem="3g8-Ef-d5u" secondAttribute="bottom" constant="15" id="CuE-ev-hkV"/>
+                            <constraint firstItem="cgC-Sb-iyr" firstAttribute="centerX" secondItem="goM-QD-8pn" secondAttribute="centerX" id="D3s-ZR-Qz5"/>
+                            <constraint firstItem="TN9-95-T9n" firstAttribute="centerX" secondItem="goM-QD-8pn" secondAttribute="centerX" id="LiK-Na-trO"/>
+                            <constraint firstItem="3g8-Ef-d5u" firstAttribute="top" secondItem="goM-QD-8pn" secondAttribute="top" constant="35" id="cKC-Zv-vXH"/>
+                            <constraint firstItem="TN9-95-T9n" firstAttribute="top" secondItem="ZMt-rD-eYv" secondAttribute="bottom" constant="15" id="gd9-ng-Uh8"/>
+                            <constraint firstItem="ZMt-rD-eYv" firstAttribute="centerX" secondItem="goM-QD-8pn" secondAttribute="centerX" id="n7l-72-o5D"/>
+                            <constraint firstItem="MsS-OS-nbp" firstAttribute="top" secondItem="leL-nG-R1H" secondAttribute="bottom" constant="34" id="oWJ-MV-2US"/>
+                            <constraint firstItem="MsS-OS-nbp" firstAttribute="centerX" secondItem="goM-QD-8pn" secondAttribute="centerX" id="tT9-5v-O9p"/>
+                            <constraint firstItem="leL-nG-R1H" firstAttribute="top" secondItem="cgC-Sb-iyr" secondAttribute="bottom" constant="15" id="wqN-fA-XI4"/>
+                            <constraint firstItem="3g8-Ef-d5u" firstAttribute="centerX" secondItem="goM-QD-8pn" secondAttribute="centerX" id="yp9-Qf-nif"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="errorLabel" destination="MsS-OS-nbp" id="Daa-Xt-PXb"/>
+                        <outlet property="folderLabel" destination="ZMt-rD-eYv" id="jBG-xy-dcC"/>
+                    </connections>
                 </viewController>
-                <customObject id="viw-Dr-UC2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="Gq8-nh-8bI" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-54" y="887"/>
+            <point key="canvasLocation" x="-697" y="548"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="hand.point.down" catalog="system" width="16" height="19"/>
+    </resources>
 </document>
