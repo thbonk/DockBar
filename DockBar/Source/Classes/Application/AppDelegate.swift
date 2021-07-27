@@ -100,10 +100,30 @@ class AppDelegate: NSResponder, NSApplicationDelegate {
 
   // MARK: - Public Methods
 
-  func openDockEntry(entry: DockEntry, isBookmarked: Bool = false) {
+  func openDockEntry(entry: DockEntry) {
     DispatchQueue.main.async {
-      NSWorkspace.shared.open(entry.url!, configuration: NSWorkspace.OpenConfiguration()) { app, error in
-        NSLog("\(String(describing: error))")
+      NSWorkspace
+        .shared
+        .open(
+          AppDelegate.preferences.grantedAccessUrl(for: entry.url!),
+          configuration: NSWorkspace.OpenConfiguration()) { app, error in
+
+        guard error == nil else {
+          let pathUrl = entry.url!.deletingLastPathComponent()
+
+          GrantAccessWindowController
+            .grantAccess(
+              to: pathUrl,
+              completed: { folderUrl in
+              
+              if let url = folderUrl {
+                AppDelegate.preferences.storeGrantedAccessUrl(url, for: entry.url!)
+                NSWorkspace.shared.open(url.appendingPathComponent(entry.url!.lastPathComponent))
+              }
+            })
+
+          return
+        }
       }
     }
   }
