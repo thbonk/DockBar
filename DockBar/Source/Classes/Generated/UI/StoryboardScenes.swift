@@ -15,7 +15,7 @@ internal enum StoryboardScene {
   internal enum Main: StoryboardType {
     internal static let storyboardName = "Main"
 
-    internal static let setupWizardWindowController = SceneType<AppKit.NSWindowController>(storyboard: Main.self, identifier: "SetupWizardWindowController")
+    internal static let grantAccessWindowController = SceneType<DockBar.GrantAccessWindowController>(storyboard: Main.self, identifier: "GrantAccessWindowController")
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
