@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19115.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19115.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -71,11 +70,8 @@
                                                 <action selector="openDocument:" target="Ady-hI-5gd" id="bVn-NM-KNZ"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Grant Access to Preferences..." id="0vs-3t-jhW">
+                                        <menuItem title="Import Dock Configuration..." id="0vs-3t-jhW">
                                             <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="grantAccessToPreferencesFolder" target="Voe-Tx-rLC" id="7DM-tg-RJ8"/>
-                                            </connections>
                                         </menuItem>
                                         <menuItem title="Open Recent" id="tXI-mr-wws">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -732,24 +728,24 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3g8-Ef-d5u">
-                                <rect key="frame" x="140" y="249" width="220" height="16"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="DockBar needs access to the folder" id="KFO-xY-ec3">
+                                <rect key="frame" x="121" y="249" width="258" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="DockBar needs access to the file or folder" id="KFO-xY-ec3">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZMt-rD-eYv">
-                                <rect key="frame" x="156" y="218" width="188" height="16"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="&lt;Folder Name goes here&gt;" id="YUO-Cy-FhV">
+                                <rect key="frame" x="184" y="218" width="133" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="&lt;Path goes here&gt;" id="YUO-Cy-FhV">
                                     <font key="font" size="13" name="Monaco"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TN9-95-T9n">
-                                <rect key="frame" x="112" y="187" width="277" height="16"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Please push this button and open that folder!" id="Ee9-hn-UDT">
+                                <rect key="frame" x="93" y="187" width="315" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Please push this button and open that file or folder!" id="Ee9-hn-UDT">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

@@ -18,6 +18,7 @@
 //  limitations under the License.
 //
 
+import Foundation
 import SwiftUI
 
 struct ApplicationDockView: View {
@@ -25,11 +26,9 @@ struct ApplicationDockView: View {
   // MARK: - Public Properties
   
   var body: some View {
-    HStack {
-      Spacer()
-      ApplicationTiles()
-      Spacer()
-    }
+    ApplicationTiles()
+      .padding(.vertical, 10)
+      .padding(.horizontal, 20)
   }
 
 
@@ -38,14 +37,29 @@ struct ApplicationDockView: View {
   private func ApplicationTiles() -> AnyView {
     do {
       let model = try dockModelProvider.model()
+      var columnCount = Int(Double(model.applications.count).squareRoot())
+      columnCount = columnCount + columnCount / 2
+      let columns: [GridItem] = Array(repeating: .init(.fixed(76)), count: columnCount)
 
       return AnyView(
-        ForEach(model.applications) { app in
-        Image(nsImage: app.icon!)
-          .padding(.horizontal, 2)
-          .padding(.vertical, 5)
-          .onTapGesture {
-            dockPanelController.openEntry(entry: app)
+        LazyVGrid(columns: columns) {
+        ForEach(model.applications, id: \.id) { app in
+          Image(nsImage: app.icon!.resized(width: 64, height: 64))
+              .padding(.all, 12)
+              .background(hoverId == app.id ? Color.accentColor.opacity(0.4) : Color.clear)
+              .cornerRadius(10, antialiased: true)
+              .onHover{ on in
+                withAnimation {
+                  if on {
+                    hoverId = app.id
+                  }
+                }
+              }
+              .onTapGesture {
+                withAnimation(.easeOut(duration: 700)) {
+                  dockPanelController.openEntry(entry: app)
+                }
+              }
           }
       })
     } catch {
@@ -62,6 +76,8 @@ struct ApplicationDockView: View {
 
   private var columns = Array(repeating: GridItem(.flexible()), count: 5)
 
+  @State
+  private var hoverId: Int? = nil
   @EnvironmentObject
   private var dockModelProvider: DockModelProvider
   @EnvironmentObject

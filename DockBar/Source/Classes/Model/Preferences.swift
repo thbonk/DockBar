@@ -22,21 +22,21 @@ import Foundation
 import AppKit
 
 fileprivate extension String {
-  static let PreferencesFolderUrl = "PreferencesFolderUrl"
+  static let DockConfigurationUrl = "DockConfigurationUrl"
 }
 
 class Preferences {
 
   // MARK: - Public Properties
 
-  var preferencesFolderUrl: URL? {
+  var dockConfigurationUrl: URL? {
     get {
-      if let data = userDefaults.value(forKey: .PreferencesFolderUrl) as? Data {
+      if let data = userDefaults.value(forKey: .DockConfigurationUrl) as? Data {
         var stale = false
 
         if let url = try? URL(resolvingBookmarkData: data, bookmarkDataIsStale: &stale) {
           if stale {
-            self.preferencesFolderUrl = url
+            self.dockConfigurationUrl = url
           }
 
           return url
@@ -46,26 +46,31 @@ class Preferences {
     }
     set {
       guard let url = newValue else {
-        userDefaults.removeObject(forKey: .PreferencesFolderUrl)
+        userDefaults.removeObject(forKey: .DockConfigurationUrl)
         return
       }
 
       do {
         let data = try url.bookmarkData()
-        userDefaults.set(data, forKey: .PreferencesFolderUrl)
+        userDefaults.set(data, forKey: .DockConfigurationUrl)
       } catch {
         NSAlert.showModalAlert(
-                    style: .critical,
-              messageText: "Error while granting read access to the Preferences folder.",
+          style: .critical,
+          messageText: "Error while granting read access to the URL \(url).",
           informativeText: "The error is \(error)",
-                  buttons: ["OK"])
+          buttons: ["OK"])
         NSLog("\(error)")
       }
     }
   }
 
-  var dockConfigurationUrl: URL? {
-    return preferencesFolderUrl?.appendingPathComponent("com.apple.dock.plist")
+  var dockConfiguration: DockModel? {
+    get {
+      nil
+    }
+    set {
+
+    }
   }
 
 

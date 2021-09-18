@@ -44,13 +44,6 @@ class AppDelegate: NSResponder, NSApplicationDelegate {
     FileManager.default.urls(for: .userDirectory, in: .allDomainsMask)[0]
   }
 
-  static var preferencesFolderUrl: URL {
-    return AppDelegate.userDirectory
-      .appendingPathComponent(NSUserName())
-      .appendingPathComponent("Library")
-      .appendingPathComponent("Preferences")
-  }
-
   static var dockConfigurationUrl: URL {
     return AppDelegate.userDirectory
       .appendingPathComponent(NSUserName())
@@ -80,8 +73,9 @@ class AppDelegate: NSResponder, NSApplicationDelegate {
   // MARK: - NSApplicationDelegate
   
   func applicationDidFinishLaunching(_ aNotification: Notification) {
-    if AppDelegate.preferences.preferencesFolderUrl == nil {
-      grantAccessToPreferencesFolder()
+    guard let _ = AppDelegate.preferences.dockConfigurationUrl, let _ = try? DockModel(from: AppDelegate.preferences.dockConfigurationUrl!) else { // AppDelegate.preferences.dockConfiguration else {
+      grantAccessToDockConfiguration()
+      return
     }
   }
 
@@ -128,6 +122,19 @@ class AppDelegate: NSResponder, NSApplicationDelegate {
     }
   }
 
+  func grantAccessToDockConfiguration() {
+    GrantAccessWindowController
+      .grantAccess(
+        to: AppDelegate.dockConfigurationUrl,
+        check: checkDockConfigurationFileAccess) { configUrl in
+
+        if let url = configUrl {
+          AppDelegate.preferences.dockConfigurationUrl = url
+        }
+      }
+  }
+
+  /* TODO
   @IBAction
   func grantAccessToPreferencesFolder(_ sender: Any? = nil) {
     GrantAccessWindowController
@@ -140,15 +147,14 @@ class AppDelegate: NSResponder, NSApplicationDelegate {
         }
       }
   }
+  */
 
 
   // MARK: - Private Methods
 
-  private func checkDockConfigurationFileAccess(_ folderUrl: URL) -> String? {
-    let url = folderUrl.appendingPathComponent("com.apple.dock.plist")
-
+  private func checkDockConfigurationFileAccess(_ configUrl: URL) -> String? {
     do {
-      _ = try Data(contentsOf: url)
+      _ = try Data(contentsOf: configUrl)
     } catch {
       return "Can't read the macOS Dock configuration. Error was \(error.localizedDescription)"
     }

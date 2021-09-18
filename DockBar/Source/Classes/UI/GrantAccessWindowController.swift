@@ -13,7 +13,7 @@ class GrantAccessWindowController: NSWindowController {
 
   private var folderUrl: URL? = nil {
     didSet {
-      grantAccessViewController?.folderUrl = folderUrl
+      grantAccessViewController?.pathUrl = folderUrl
     }
   }
   private var checkClosure: ((URL) -> (String?))? = nil {
@@ -69,9 +69,9 @@ class GrantAccessViewController: NSViewController {
 
   // MARK: - Private Properties
 
-  fileprivate var folderUrl: URL? = nil {
+  fileprivate var pathUrl: URL? = nil {
     didSet {
-      folderLabel.stringValue = folderUrl?.path ?? "<unknown>"
+      folderLabel.stringValue = pathUrl?.path ?? "<unknown>"
     }
   }
   fileprivate var checkClosure: ((URL) -> (String?))? = nil
@@ -94,12 +94,12 @@ class GrantAccessViewController: NSViewController {
     let selectedFolderUrl = showFolderOpenPanel()
 
     guard let url = selectedFolderUrl else {
-      showError("You haven't selected any folder. Please try again!")
+      showError("You haven't selected anything. Please try again!")
       return
     }
 
-    guard url.path == folderUrl?.path else {
-      showError("You have selected the folder \(url.path) which is the wrong folder. Please try again!")
+    guard url.path == pathUrl?.path else {
+      showError("You have selected \(url.path) which is wrong. Please try again!")
       return
     }
 
@@ -114,22 +114,25 @@ class GrantAccessViewController: NSViewController {
       clearError()
       completedClosure?(url)
     } catch {
-      showError("Error while granting access to folder '\(folderUrl!.path)'.\nError is \(error.localizedDescription)")
+      showError("Error while granting access to '\(pathUrl!.path)'.\nError is \(error.localizedDescription)")
     }
   }
 
   private func showFolderOpenPanel() -> URL? {
     let dialog = NSOpenPanel()
+    var isDirectory = ObjCBool(false)
 
-    dialog.title = "Please select the folder \(folderUrl!.path)"
-    dialog.message = "Please select the folder \(folderUrl!.path)"
-    dialog.canChooseDirectories = true
-    dialog.canChooseFiles = false
+    FileManager.default.fileExists(atPath: pathUrl!.path, isDirectory: &isDirectory)
+
+    dialog.title = "Please select \(pathUrl!.path)"
+    dialog.message = "Please select \(pathUrl!.path)"
+    dialog.canChooseDirectories = isDirectory.boolValue
+    dialog.canChooseFiles = !isDirectory.boolValue
     dialog.canHide = false
     dialog.isAccessoryViewDisclosed = false
     dialog.showsTagField = false
     dialog.canCreateDirectories = false
-    dialog.directoryURL = folderUrl
+    dialog.directoryURL = pathUrl
     dialog.allowsMultipleSelection = false
 
     switch dialog.runModal() {

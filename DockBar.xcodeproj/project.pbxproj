@@ -23,6 +23,7 @@
 		E931779C269F4E4E0004B739 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E931779B269F4E4E0004B739 /* StatusBarController.swift */; };
 		E95DA6C526A03B59002266D0 /* DockModelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95DA6C426A03B59002266D0 /* DockModelProvider.swift */; };
 		E95DA6C826A03D35002266D0 /* ApplicationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95DA6C726A03D35002266D0 /* ApplicationListView.swift */; };
+		E9C4018126BE685100722821 /* NSImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C4018026BE685100722821 /* NSImage+resize.swift */; };
 		E9D594A226A2155B001284FC /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D594A126A2155B001284FC /* ScreenSize.swift */; };
 		E9E73B3A26A6D84E00A5DBBB /* StoryboardSegues.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E73B3826A6D84E00A5DBBB /* StoryboardSegues.swift */; };
 		E9E73B3B26A6D84E00A5DBBB /* StoryboardScenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E73B3926A6D84E00A5DBBB /* StoryboardScenes.swift */; };
@@ -61,6 +62,7 @@
 		E931779B269F4E4E0004B739 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		E95DA6C426A03B59002266D0 /* DockModelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockModelProvider.swift; sourceTree = "<group>"; };
 		E95DA6C726A03D35002266D0 /* ApplicationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationListView.swift; sourceTree = "<group>"; };
+		E9C4018026BE685100722821 /* NSImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+resize.swift"; sourceTree = "<group>"; };
 		E9D594A126A2155B001284FC /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
 		E9E73B3426A6D73400A5DBBB /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		E9E73B3826A6D84E00A5DBBB /* StoryboardSegues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardSegues.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				E9FFFED226A541130008A613 /* NSAlert+ShowModalAlert.swift */,
+				E9C4018026BE685100722821 /* NSImage+resize.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9C4018126BE685100722821 /* NSImage+resize.swift in Sources */,
 				E95DA6C826A03D35002266D0 /* ApplicationListView.swift in Sources */,
 				E9FFFED326A541130008A613 /* NSAlert+ShowModalAlert.swift in Sources */,
 				E91C911126A351B100003EF7 /* ApplicationDockView.swift in Sources */,

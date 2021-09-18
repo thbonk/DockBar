@@ -71,7 +71,7 @@ class DockPanelController: NSWindowController, ObservableObject {
 
   private func hideDockPanel() {
     DispatchQueue.main.async {
-      self.dockPanel.close()
+      self.dockPanel.hidesOnDeactivate = true
     }
     DispatchQueue.main.async {
       self.frontmostApplication?.activate(options: .activateIgnoringOtherApps)
@@ -92,19 +92,7 @@ class DockPanelController: NSWindowController, ObservableObject {
             .background(Color("DockPopupColor"))
             .cornerRadius(5)))
 
-    DispatchQueue.main.async {
-      do {
-        let coords = try self.calculateDockPanelCoords()
-        self.dockPanel.setFrameOrigin(coords.0)
-        self.dockPanel.setContentSize(coords.1)
-      } catch {
-        NSAlert.showModalAlert(
-          style: .critical,
-          messageText: "Error while reading the macOS Dock configuration.",
-          informativeText: "The error is \(error)",
-          buttons: ["OK"])
-      }
-    }
+
 
     DispatchQueue.main.async {
       NSApp.activate(ignoringOtherApps: true)
@@ -113,23 +101,42 @@ class DockPanelController: NSWindowController, ObservableObject {
         self.dockPanel.orderFrontRegardless()
       }
     }
+
+    DispatchQueue.main.async {
+      do {
+        let frame = self.dockPanel.contentView!.frame
+        let position = try self.calculateDockPanelCoords(panelSize: frame.size)
+
+        self.dockPanel.setFrameOrigin(position)
+      } catch {
+        NSAlert.showModalAlert(
+          style: .critical,
+          messageText: "Error while reading the macOS Dock configuration.",
+          informativeText: "The error is \(error)",
+          buttons: ["OK"])
+      }
+    }
   }
 
-  private func calculateDockPanelCoords() throws -> (NSPoint, NSSize) {
-    let model = try AppDelegate.shared.dockModelProvider.model()
+  private func calculateDockPanelCoords(panelSize size: NSSize) throws -> NSPoint {
     let mouseLocation = mouseLocation()
     let screenFrame = screenWithMouse()!.frame
-    let screenWidth = Int(screenFrame.size.width)
-    let contentHeight = model.maxIconHeight
-    var contentWidth = model.allIconsWidth + model.applications.count * 10 + Int(Double(model.applications.count) * 2.5)
+    var pos = NSPoint(x: mouseLocation.x - (size.width / 2), y: mouseLocation.y - (size.height / 2))
 
-    if contentWidth > screenWidth {
-      contentWidth = screenWidth
+    if pos.x < 0 {
+      pos.x = 0
+    }
+    if (pos.x + size.width) > screenFrame.size.width {
+      pos.x = screenFrame.size.width - size.width
+    }
+    if pos.y < 0 {
+      pos.y = 0
+    }
+    if (pos.y + size.height) > screenFrame.size.height {
+      pos.y = screenFrame.size.height - size.height
     }
 
-    let xPos = Int(screenFrame.origin.x) + Int((screenWidth - contentWidth) / 2)
-    
-    return (NSPoint(x: xPos, y: Int(mouseLocation.y)), NSSize(width: contentWidth, height: contentHeight + 10))
+    return pos
   }
 
   private func makePanel() -> NSPanel {
@@ -141,7 +148,7 @@ class DockPanelController: NSWindowController, ObservableObject {
     visualEffect.layer?.backgroundColor = NSColor.controlColor.cgColor
     visualEffect.state = .active
     visualEffect.wantsLayer = true
-    visualEffect.layer?.cornerRadius = 10.0
+    visualEffect.layer?.cornerRadius = 25.0
 
     panel.titleVisibility = .hidden
     panel.styleMask.remove(.titled)
