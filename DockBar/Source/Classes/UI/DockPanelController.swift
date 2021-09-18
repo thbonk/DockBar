@@ -92,28 +92,28 @@ class DockPanelController: NSWindowController, ObservableObject {
             .background(Color("DockPopupColor"))
             .cornerRadius(5)))
 
-
-
-    DispatchQueue.main.async {
-      NSApp.activate(ignoringOtherApps: true)
-      self.showWindow(self)
-      DispatchQueue.main.async {
-        self.dockPanel.orderFrontRegardless()
-      }
-    }
-
     DispatchQueue.main.async {
       do {
         let frame = self.dockPanel.contentView!.frame
         let position = try self.calculateDockPanelCoords(panelSize: frame.size)
 
-        self.dockPanel.setFrameOrigin(position)
+        let fr = NSRect(x: position.x, y: position.y, width: frame.size.width, height: frame.size.height)
+        self.dockPanel.setFrame(fr, display: true)
+        //self.dockPanel.setFrameOrigin(position)
       } catch {
         NSAlert.showModalAlert(
           style: .critical,
           messageText: "Error while reading the macOS Dock configuration.",
           informativeText: "The error is \(error)",
           buttons: ["OK"])
+      }
+    }
+
+    DispatchQueue.main.async {
+      NSApp.activate(ignoringOtherApps: true)
+      self.showWindow(self)
+      DispatchQueue.main.async {
+        self.dockPanel.orderFrontRegardless()
       }
     }
   }
@@ -135,6 +135,8 @@ class DockPanelController: NSWindowController, ObservableObject {
     if (pos.y + size.height) > screenFrame.size.height {
       pos.y = screenFrame.size.height - size.height
     }
+
+    NSLog("Mouse Location: \(mouseLocation) | Panel Size: \(size) | Panel Position: \(pos)")
 
     return pos
   }
