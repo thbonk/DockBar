@@ -92,21 +92,19 @@ class DockPanelController: NSWindowController, ObservableObject {
             .background(Color("DockPopupColor"))
             .cornerRadius(5)))
 
-    DispatchQueue.main.async {
-      do {
-        let frame = self.dockPanel.contentView!.frame
-        let position = try self.calculateDockPanelCoords(panelSize: frame.size)
+    do {
+      let frame = self.dockPanel.contentView!.frame
+      let position = try self.calculateDockPanelCoords(panelSize: frame.size)
 
-        let fr = NSRect(x: position.x, y: position.y, width: frame.size.width, height: frame.size.height)
-        self.dockPanel.setFrame(fr, display: true)
-        //self.dockPanel.setFrameOrigin(position)
-      } catch {
-        NSAlert.showModalAlert(
-          style: .critical,
-          messageText: "Error while reading the macOS Dock configuration.",
-          informativeText: "The error is \(error)",
-          buttons: ["OK"])
-      }
+      let fr = NSRect(x: position.x, y: position.y, width: frame.size.width, height: frame.size.height)
+      self.dockPanel.setFrame(fr, display: false)
+      //self.dockPanel.setFrameOrigin(position)
+    } catch {
+      NSAlert.showModalAlert(
+        style: .critical,
+        messageText: "Error while reading the macOS Dock configuration.",
+        informativeText: "The error is \(error)",
+        buttons: ["OK"])
     }
 
     DispatchQueue.main.async {
@@ -123,14 +121,14 @@ class DockPanelController: NSWindowController, ObservableObject {
     let screenFrame = screenWithMouse()!.frame
     var pos = NSPoint(x: mouseLocation.x - (size.width / 2), y: mouseLocation.y - (size.height / 2))
 
-    if pos.x < 0 {
-      pos.x = 0
+    if pos.x < screenFrame.origin.x {
+      pos.x = screenFrame.origin.x
     }
     if (pos.x + size.width) > screenFrame.size.width {
       pos.x = screenFrame.size.width - size.width
     }
-    if pos.y < 0 {
-      pos.y = 0
+    if pos.y < screenFrame.origin.y {
+      pos.y = screenFrame.origin.y
     }
     if (pos.y + size.height) > screenFrame.size.height {
       pos.y = screenFrame.size.height - size.height
